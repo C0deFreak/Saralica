@@ -1,2 +1,2 @@
-# ChessAi
- My try at making a simple website with an ai you can play with
+# ProgrammingWiki
+ My try at a database with all of the functions and options of many programming languages
