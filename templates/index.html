@@ -5,36 +5,28 @@
 {% endblock %}
 
 {% block body %}
-<div class="content">
-    <h1 style="text-align: center">Task Master</h1>
-    {% if tasks|length < 1 %}
-    <h4 style="text-align: center">There are no tasks. Create one below!</h4>
-    {% else %}
-    <table>
-        <tr>
-            <th style="width: 110px;">Task</th>
-            <th style="width: 120px;">Added</th>
-            <th style="width: 130px;">Actions</th>
-        </tr>
-        {% for task in tasks %}
-            <tr>
-                <td>{{ task.content }}</td>
-                <td>{{ task.date_created.date() }}</td>
-                <td>
-                    <a href="/delete/{{task.id}}">Delete</a>
-                    <br>
-                    <a href="/update/{{task.id}}">Update</a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
+<body>
+    <img class="background">
+    <div>
+        <div class="maintitle">
+            <div class="title" style="font-family: 'Courier New', Courier, monospace;">Scriptopedia</div>
+            <div class="sitesnum">
+                • {{ sitesNum }}
+            <h6 class="articles">Functions</h6>
+            </div>
+        </div>
+       
+        <div class="search">
+            <form action="/" method="POST" >
+                <input type="search" class="searchbar" placeholder="Search...">
+            </form>
+        </div>
 
-    <div class="form">
-    <form action="/" method="POST">
-        <input type="text" name="content" id="content">
-        <input type="submit" value="Add Task">
-    </form>
+        <div class="create">
+            <a class="createbtn" href="/create">Create</a>
+        </form>
+        </div>
     </div>
-</div>
+
+</body>
 {% endblock %}
