@@ -6,27 +6,34 @@
 
 {% block body %}
 <body>
-    <img class="background">
     <div>
         <div class="maintitle">
-            <div class="title" style="font-family: 'Courier New', Courier, monospace;">Scriptopedia</div>
-            <div class="sitesnum">
-                • {{ sitesNum }}
-            <h6 class="articles">Functions</h6>
+            <div class="title" style="margin-left: 720px;">{{ title }}</div>
             </div>
         </div>
        
+        {% if create_post %}
+        <div class="overlay"></div>
+        <div class="create_pannel" style="padding-left: 20px;">
+            <input style="margin-top: 30px; width: 1102px; border-radius: 7px;" type="search" class="small-input-field" placeholder="func_title" maxlength="50">
+            <textarea rows="4" cols="121.5" class="description" placeholder="description(600 char)" maxlength="600"></textarea>
+            <div class="create" style="margin-left: 1052px; margin-top: 11px;"><a class="createbtn" href="/close">esc</a></div>
+            <div class="create" style="margin-left: 977px; margin-top: 11px;"><a class="createbtn" href="/close">post</a></div>
+        </div>
+
+        {% else %}
         <div class="search">
             <form action="/" method="POST" >
-                <input type="search" class="searchbar" placeholder="Search...">
+                <input maxlength="50" style="width: 535px; border-radius: 20px 0px 0px 20px;" type="search" class="small-input-field" placeholder="find_code">
             </form>
         </div>
 
         <div class="create">
-            <a class="createbtn" href="/create">Create</a>
+            <a class="createbtn" href="/create" style="border: 1px solid #3b3b3b; border-radius: 0px 20px 20px 0px;">make</a>
         </form>
         </div>
-    </div>
 
+        {% endif %}
+    </div>
 </body>
 {% endblock %}

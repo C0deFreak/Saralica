@@ -3,17 +3,23 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-dbTerms = SQLAlchemy(app)
+functionDatabase = SQLAlchemy(app)
 
-class TermSite(dbTerms.Model):
-    id = dbTerms.Column(dbTerms.Integer, primary_key=True)
-    name = dbTerms.Column(dbTerms.String(100), nullable=False, default='bruh')
-    content = dbTerms.Column(dbTerms.String(200), nullable=False)
-    author = dbTerms.Column(dbTerms.String(50), nullable=False, default='bruh')
-    language = dbTerms.Column(dbTerms.String(25), nullable=False, default='bruh')
-    date_created = dbTerms.Column(dbTerms.DateTime, default=datetime.utcnow)
+create_post = False
+title = '~/Scriptopedia'
+
+
+class FunctionSite(functionDatabase.Model):
+    id = functionDatabase.Column(functionDatabase.Integer, primary_key=True)
+    name = functionDatabase.Column(functionDatabase.String(12), nullable=False, default='bruh')
+    description = functionDatabase.Column(functionDatabase.String(600), nullable=False)
+    author = functionDatabase.Column(functionDatabase.String(20), nullable=False, default='bruh')
+    language = functionDatabase.Column(functionDatabase.String(25), nullable=False, default='bruh')
+    date_created = functionDatabase.Column(functionDatabase.DateTime, default=datetime.utcnow)
+
 
     def __repr__(self):
         return '<Site %r>' % self.id
@@ -22,54 +28,48 @@ class TermSite(dbTerms.Model):
 def index():
     if request.method == 'POST':
         try:
-            return redirect('/create')
+            return redirect('/search')
         except:
             return 'There creating your site!'
 
     else:
+        return render_template('index.html', create_post=create_post, title=title)
 
-        sitesNum = TermSite.query.count()
-        return render_template('index.html', sitesNum = sitesNum)
-
-@app.route('/create', methods=['POST', 'GET'])
+@app.route('/create')
 def create():
-    if request.method == 'POST':
-        site_content = request.form['content']
-        new_site = TermSite(content=site_content)
+    global create_post, title
+    create_post = True
+    title = '~/Scriptopedia/make'
+    return redirect('/')
 
-        try:
-            dbTerms.session.add(new_site)
-            dbTerms.session.commit()
-            return redirect('/')
-        except:
-            return 'There was an issue adding your task'
-
-    else:
-        sites = TermSite.query.order_by(TermSite.date_created).all()
-        return render_template('create.html', sites = sites)
+@app.route('/close')
+def close():
+    global create_post, title
+    create_post = False
+    title = '~/Scriptopedia'
+    return redirect('/')
 
 @app.route('/delete/<int:id>')
 def delete(id):
-    site_to_delete = TermSite.query.get_or_404(id)
+    site_to_delete = FunctionSite.query.get_or_404(id)
 
     try:
-        dbTerms.session.delete(site_to_delete)
-        dbTerms.session.commit()
+        functionDatabase.session.delete(site_to_delete)
+        functionDatabase.session.commit()
         return redirect('/')
     except:
         return 'There was a problem deleting that site'
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
-    site = TermSite.query.get_or_404(id)
+    site = FunctionSite.query.get_or_404(id)
 
     if request.method == 'POST':
         site.content = request.form['content']
 
         try:
-            dbTerms.session.commit()
+            functionDatabase.session.commit()
             return redirect('/')
-
         except:
             return 'There was an issue updating your task'
 
