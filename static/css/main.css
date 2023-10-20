@@ -20,6 +20,18 @@ form {
   }
 
 
+table {
+    border-collapse: collapse;
+    margin-left: auto; 
+    margin-right: auto;
+}
+tr {
+    text-align: center;
+}
+td {
+    text-align: center;
+}
+
 
 .sitesnum {
     text-align: center;
@@ -73,8 +85,13 @@ form {
     border: 1px solid #3b3b3b;
     font-size: large;
     border-radius: 20px;
-    color:white;
     font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+}
+input, select, textarea{
+    color: white;
+}
+textarea:focus, input:focus {
+    color: white;
 }
 
 

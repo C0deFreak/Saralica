@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<body>
+    <div>
+        <div class="maintitle">
+            <div class="title" style="margin-left: 100px; width: 1780px; font-size: 40px;">
+                <font color="white">../</font>
+                <font color="#1776ab">{{ function.date_created.date() }}</font>
+                <font color="white">/</font>
+                <font color="#e5d815">{{ function.language.upper() }}</font>
+                <font color="white">/</font>
+                <font color="#0dbc79">{{ function.name.lower() }}</font>
+            </div>
+            <div>
+                <h2 style="margin-left: 100px; color: white; margin-top: 150px; position: absolute;">
+                    {{ function.description }} <br>
+                    <div class="create" style="margin-left: 0px; margin-top: 50px;"><a class="createbtn" href="/delete/{{function.id}}" style="color: #f14c4c;">del</a></div>
+                </h2>    
+            </div>
+        </div>
+       
+    </div>
+</body>
+{% endblock %}
