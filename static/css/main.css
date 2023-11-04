@@ -58,6 +58,7 @@ td {
 .createbtn {
     text-align: center;
     background-color: #272727;
+    border: 1px solid #3b3b3b;
     box-sizing: border-box;
     border-radius: 25px;
     height: 40px;
@@ -65,6 +66,21 @@ td {
     padding-bottom: 10px; 
     padding-left: 16px; 
     padding-right: 16px;
+    font-weight: bolder;
+    color: white;
+    text-decoration: none;
+}
+.navbtn {
+    text-align: center;
+    background-color: #272727;
+    border: 1px solid #3b3b3b;
+    box-sizing: border-box;
+    border-radius: 0px;
+    height: 40px;
+    padding-top: 9px;
+    padding-bottom: 10px; 
+    padding-left: 8px; 
+    padding-right: 8px;
     font-weight: bolder;
     color: white;
     text-decoration: none;
@@ -103,7 +119,7 @@ textarea:focus, input:focus {
     margin-left: 384px;
     width: 1152px;
     height: 648px;
-    z-index: 2;
+    z-index: 4;
     background-color: #1f1f1f;
     border-radius: 7px;
 }

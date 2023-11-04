@@ -20,6 +20,11 @@
                 <h2 style="margin-left: 100px; color: white; margin-top: 150px; position: absolute;">
                     {{ function.description }} <br>
                     <div class="create" style="margin-left: 0px; margin-top: 50px;"><a class="createbtn" href="/delete/{{function.id}}" style="color: #f14c4c;">del</a></div>
+                    {% if function.bookmark %}
+                        <div class="create" style="margin-left: 80px; margin-top: 50px;"><a class="createbtn" href="/bookmark/{{function.id}}" style="color: #3b3b3b;">mark</a></div>
+                    {% else %}
+                        <div class="create" style="margin-left: 80px; margin-top: 50px;"><a class="createbtn" href="/bookmark/{{function.id}}" style="color: #e5d815;">mark</a></div>
+                    {% endif %}
                 </h2>    
             </div>
         </div>

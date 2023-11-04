@@ -15,10 +15,11 @@ func_search = ''
 
 class FunctionSite(functionDatabase.Model):
     id = functionDatabase.Column(functionDatabase.Integer, primary_key=True)
-    name = functionDatabase.Column(functionDatabase.String(30), nullable=False, default='bruh')
-    description = functionDatabase.Column(functionDatabase.String(600), nullable=False)
-    language = functionDatabase.Column(functionDatabase.String(12), nullable=False, default='bruh')
+    name = functionDatabase.Column(functionDatabase.String(30), nullable=False, default=' ')
+    description = functionDatabase.Column(functionDatabase.String(600), nullable=False, default=' ')
+    language = functionDatabase.Column(functionDatabase.String(12), nullable=False, default=' ')
     date_created = functionDatabase.Column(functionDatabase.DateTime, default=datetime.utcnow)
+    bookmark = functionDatabase.Column(functionDatabase.Boolean, default=False)
 
 
     def __repr__(self):
@@ -26,6 +27,7 @@ class FunctionSite(functionDatabase.Model):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
+    functions = FunctionSite.query.order_by(FunctionSite.name).all()
     if request.method == 'POST':
         global func_search
         func_search = request.form['search']
@@ -35,7 +37,7 @@ def index():
             return 'Error: Could not search :('
 
     else:
-        return render_template('index.html', create_post=create_post, title=title)
+        return render_template('index.html', create_post=create_post, title=title, functions=functions)
 
 @app.route('/open')
 def open():
@@ -67,7 +69,7 @@ def create():
             return 'Error: Could not create the function :('
 
     else:
-        return render_template('index.html')
+        return render_template('index.html', functions=functions)
 
 @app.route('/search')
 def search():
@@ -86,10 +88,24 @@ def delete(id):
     except:
         return 'Error: Could not delete the function :('
 
+@app.route('/bookmark/<int:id>')
+def bookmark(id):
+    function_to_mark = FunctionSite.query.get_or_404(id)
+
+    try:
+        if function_to_mark.bookmark:
+            function_to_mark.bookmark = False
+        else:
+            function_to_mark.bookmark = True
+        functionDatabase.session.commit()
+        return redirect('/')
+    except:
+        return 'Error: Could not bookmark the function :('
+
 @app.route('/function/<int:id>', methods=['GET', 'POST'])
 def function(id):
     function = FunctionSite.query.get_or_404(id)
     return render_template('function.html', function=function)
 
 if __name__ == "__main__":
-    app.run(debug=False, host='0.0.0.0')
+    app.run(debug=True)

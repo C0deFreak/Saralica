@@ -6,16 +6,18 @@
 
 {% block body %}
 <div class="content">
-    <h1 style="text-align: center; color: #e5d815; font-size: xx-large;">search_result:</h1>
+    <h1 style="text-align: center; color: #e5d815; font-size: xx-large;">search_result: "{{ search }}"</h1>
     {% if functions|length < 1 %}
-    <h4 style="text-align: center">There are no tasks. Create one below!</h4>
+    <h4 style="text-align: center"> Error: No functions could be found :( </h4>
     {% else %}
     <table>
         <tr>
             <th style="width: 800px;"></th>
         </tr>
         {% for function in functions %}
-            {% if (search in function.name or search in function.language) or (function.name in search or function.language in search) %}
+            {% if search.lower() == function.name.lower() %}
+                <meta http-equiv="refresh" content="0; /function/{{ function.id }}">
+            {% elif (search in function.name or search in function.language) or (function.name in search or function.language in search) %}
                 <tr>
                     <td style="color: #e5d815; font-size: x-large;">
                         <font color="white">../</font>
