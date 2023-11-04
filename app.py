@@ -108,4 +108,4 @@ def function(id):
     return render_template('function.html', function=function)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
