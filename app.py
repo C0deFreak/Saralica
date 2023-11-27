@@ -74,8 +74,15 @@ def create():
 @app.route('/search')
 def search():
     global func_search
+    global isFound
+    isFound = False
     functions = FunctionSite.query.order_by(FunctionSite.name).all()
-    return render_template('search.html', search=func_search, functions=functions)
+
+    for function in functions:
+        if (func_search in function.name or func_search in function.language) or (function.name in func_search or function.language in func_search):
+            isFound = True
+
+    return render_template('search.html', search=func_search, functions=functions, isFound=isFound)
 
 @app.route('/delete/<int:id>')
 def delete(id):
@@ -108,4 +115,4 @@ def function(id):
     return render_template('function.html', function=function)
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
