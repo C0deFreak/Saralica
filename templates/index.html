@@ -1,27 +1,5 @@
 {% extends 'base.html' %}
 
-{% block head %}
-<head>
-    <style>
-        #navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #333; 
-            color: white;
-            width: 250px; 
-            height: 100%; 
-            overflow-y: auto; 
-            z-index: 1; 
-        }
-
-        #function-list {
-            padding-top: 55px;
-        }
-    </style>
-</head>
-{% endblock %}
-
 {% block body %}
 <body>
     <div>
@@ -55,18 +33,46 @@
         </div>
 
         {% endif %}
-
-        <button id="navbar-toggle" class="navbtn" style="position: fixed; top: 0px; left: 0px; z-index: 2;">nav</button>
+        <style>
+            /* Styling for the navigation bar on the left */
+            #navbar {
+                position: fixed;
+                top: 0;
+                left: -250px; /* Initially position the navbar off-screen */
+                background-color: #333; /* Set your desired background color */
+                color: white;
+                width: 250px; /* Set your desired width */
+                height: 100%; /* Make it cover the entire height of the viewport */
+                overflow-y: auto; /* Enable scrolling if needed */
+                z-index: 2;
+                transition: left 0.3s; /* Add a transition for the left property */
+            }
+    
+            /* Style for the list of functions */
+            #function-list {
+                padding-left: 2px; /* Add some padding for spacing */
+            }
+    
+    
+            /* Style to show the navbar */
+            .show-navbar {
+                left: 0 !important;
+            }
+            .navText {
+                left: 70px !important;
+            }
+        </style>
+        <button id="navbar-toggle" class="navbtn" style="position: fixed; top: 0px; left: 0px; z-index: 3;">nav</button>
     
         <div id="navbar">
-            <h3 style="position: fixed; top: -10px; left: 70px; z-index: 2;">Marked Func:</h4>
+            <h4 id="navText" style="position: fixed; top: -10px; z-index: 2;">Marked Func:</h4>
             <div id="function-list">
                 <table>
                     {% for function in functions %}
                         {% if function.bookmark %}
                             <tr>
-                                <td style="color: #e5d815; font-size: large; padding-right: 120px;">
-                                    <font color="#0dbc79"><font color="white">/</font><a href="/function/{{function.id}}" style="text-decoration: none; color: #0dbc79;">{{ function.name.lower() }}</a></font>
+                                <td style="color: #e5d815; font-size: large; padding-right: 120px; padding-top: 15px;">
+                                    <font color="white">/</font><a href="/function/{{function.id}}" style="text-decoration: none; color: #0dbc79;">{{ function.name.lower() }}</a></font>
                                 </td>
                             </tr>
                         {% endif %}
@@ -78,16 +84,13 @@
         <script>
             const button = document.getElementById("navbar-toggle");
             const navbar = document.getElementById("navbar");
+            const navText = document.getElementById("navText");
 
             button.addEventListener("click", function() {
-                if (navbar.style.display === "none") {
-                    navbar.style.display = "block";
-                } else {
-                    navbar.style.display = "none";
-                }
+                navText.classList.toggle("navText")
+                navbar.classList.toggle("show-navbar")
             });
 
-            navbar.style.display = "none";
         </script>
     </div>
 </body>
