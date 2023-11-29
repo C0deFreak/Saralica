@@ -44,7 +44,25 @@ def open():
     global create_post, title
     create_post = True
     title = '~/Scriptopedia/make'
-    return redirect('/')
+@app.route('/open-edit/<int:id>', methods=['GET', 'POST'])
+def open_edit(id):
+    function_to_edit = FunctionSite.query.get_or_404(id)
+
+    if request.method == 'POST':
+        function_to_edit.description = request.form['description']
+        function_to_edit.name = request.form['name']
+        function_to_edit.language = request.form['language']
+
+        try:
+            functionDatabase.session.commit()
+            return redirect('/')
+
+        except:
+            return 'Error: Could not edit the function :('
+
+    else:
+        return render_template('update.html', function=function_to_edit)
+
 
 @app.route('/close')
 def close():

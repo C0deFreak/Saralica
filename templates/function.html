@@ -20,7 +20,7 @@
                 <h2 style="margin-left: 100px; color: white; margin-top: 150px; position: absolute;">
                     {{ function.description }} <br>
                     <div class="create" style="margin-left: 0px; margin-top: 50px;"><a class="createbtn" href="/delete/{{function.id}}" style="color: #f14c4c;">del</a></div>
-                    <div class="create" style="margin-left: 78px; margin-top: 50px;"><a class="createbtn" href="/open" style="color: #0dbc79;">update</a></div>
+                    <div class="create" style="margin-left: 78px; margin-top: 50px;"><a class="createbtn" href="/open-edit/{{function.id}}" style="color: #0dbc79;">update</a></div>
                     {% if function.bookmark %}
                         <div class="create" style="margin-left: 230px; margin-top: 50px;"><a class="createbtn" href="/bookmark/{{function.id}}" style="color: #3b3b3b; border-radius: 15px;">mark</a></div>
                     {% else %}
