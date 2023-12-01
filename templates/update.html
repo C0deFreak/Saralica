@@ -3,12 +3,12 @@
 {% block body %}
 <div class="overlay"></div>
 <div class="create_pannel" style="padding-left: 20px;">
-    <form action="/open-edit/{{ function.id }}" method="POST">
-        <input style="margin-top: 30px; margin-left: -25px; width: 1102px; border-radius: 7px;" type="search" class="small-input-field" placeholder="func_title" maxlength="30" name="name" id="name" value="{{ function.name }}">
-        <textarea rows="4" cols="121.5" class="description" placeholder="description(600 char)" maxlength="600" name="description" id="description" >{{ function.description }}</textarea>
-        <div class="create" style="margin-left: 977px; margin-top: 3px;"><input type="submit" class="createbtn" style="color: #0dbc79;" value="post"></div>
-        <div class="create" style="margin-left: 1052px; margin-top: 11px;"><a class="createbtn" href="/close" style="color: #f14c4c;">esc</a></div>
-        <input style="margin-top: 3px; margin-right: 827px; width: 300px; border-radius: 7px; height: 30px;" type="search" class="small-input-field" placeholder="type" maxlength="12" name="language" id="language" value="{{ function.language }}">
+    <form action="/uređivanje/{{ function.id }}" method="POST">
+        <input style="margin-top: 30px; width: 1102px; border-radius: 7px;" type="search" class="small-input-field" placeholder="func_title" maxlength="30" name="name" id="name" value="{{ function.name }}">
+        <textarea rows="4" cols="121.5" class="description" placeholder="opis(600 znakova)" maxlength="600" name="description" id="description" >{{ function.description }}</textarea>
+        <div class="create" style="margin-left: 977px; margin-top: 3px;"><input type="submit" class="createbtn" style="color: #0dbc79;" value="izradi"></div>
+        <div class="create" style="margin-left: 1052px; margin-top: 11px;"><a class="createbtn" href="/zatvaranje" style="color: #f14c4c;">izlaz</a></div>
+        <input style="margin-top: 3px; margin-right: 827px; width: 300px; border-radius: 7px; height: 30px;" type="search" class="small-input-field" placeholder="predmet" maxlength="12" name="language" id="language" value="{{ function.language }}">
     </form>
 </div>
 {% endblock %}

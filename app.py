@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 functionDatabase = SQLAlchemy(app)
 
 create_post = False
-title = '~/Scriptopedia'
+title = 'Šaralica'
 func_search = ''
 
 
@@ -28,23 +28,30 @@ class FunctionSite(functionDatabase.Model):
 @app.route('/', methods=['POST', 'GET'])
 def index():
     functions = FunctionSite.query.order_by(FunctionSite.name).all()
+    card_generated = False
+
+    for function in functions:
+        if function.bookmark and not card_generated:
+            card_generated = True
+
     if request.method == 'POST':
         global func_search
         func_search = request.form['search']
         try:
-            return redirect('/search')
+            return redirect('/pretraga')
         except:
-            return 'Error: Could not search :('
+            return 'Error: Pretraga neuspješna :('
 
     else:
-        return render_template('index.html', create_post=create_post, title=title, functions=functions)
+        return render_template('index.html', create_post=create_post, title=title, functions=functions, generated=card_generated)
 
-@app.route('/open')
+@app.route('/otvaranje')
 def open():
     global create_post, title
     create_post = True
-    title = '~/Scriptopedia/make'
-@app.route('/open-edit/<int:id>', methods=['GET', 'POST'])
+    title = 'Izrada'
+    return redirect('/')
+@app.route('/uređivanje/<int:id>', methods=['GET', 'POST'])
 def open_edit(id):
     function_to_edit = FunctionSite.query.get_or_404(id)
 
@@ -58,20 +65,20 @@ def open_edit(id):
             return redirect('/')
 
         except:
-            return 'Error: Could not edit the function :('
+            return 'Error: Uređivanje neuspješno :('
 
     else:
         return render_template('update.html', function=function_to_edit)
 
 
-@app.route('/close')
+@app.route('/zatvaranje')
 def close():
     global create_post, title
     create_post = False
-    title = '~/Scriptopedia'
+    title = 'Šaralica'
     return redirect('/')
 
-@app.route('/create', methods=['POST', 'GET'])
+@app.route('/izrada', methods=['POST', 'GET'])
 def create():
     if request.method == 'POST':
         func_description = request.form['description']
@@ -84,12 +91,12 @@ def create():
             functionDatabase.session.commit()
             return redirect('/')
         except:
-            return 'Error: Could not create the function :('
+            return 'Error: Izrada neuspješna :('
 
     else:
         return render_template('index.html', functions=functions)
 
-@app.route('/search')
+@app.route('/pretraga')
 def search():
     global func_search
     global isFound
@@ -102,7 +109,7 @@ def search():
 
     return render_template('search.html', search=func_search, functions=functions, isFound=isFound)
 
-@app.route('/delete/<int:id>')
+@app.route('/brisanje/<int:id>')
 def delete(id):
     function_to_delete = FunctionSite.query.get_or_404(id)
 
@@ -111,9 +118,9 @@ def delete(id):
         functionDatabase.session.commit()
         return redirect('/')
     except:
-        return 'Error: Could not delete the function :('
+        return 'Error: Brisanje neuspješno :('
 
-@app.route('/bookmark/<int:id>')
+@app.route('/označivanje/<int:id>')
 def bookmark(id):
     function_to_mark = FunctionSite.query.get_or_404(id)
 
@@ -125,9 +132,9 @@ def bookmark(id):
         functionDatabase.session.commit()
         return redirect('/')
     except:
-        return 'Error: Could not bookmark the function :('
+        return 'Error: Označivanje neuspješno :('
 
-@app.route('/function/<int:id>', methods=['GET', 'POST'])
+@app.route('/definicija/<int:id>', methods=['GET', 'POST'])
 def function(id):
     function = FunctionSite.query.get_or_404(id)
     return render_template('function.html', function=function)

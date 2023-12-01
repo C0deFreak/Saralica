@@ -4,34 +4,40 @@
 <body>
     <div>
         <div class="maintitle">
-            <div class="title" style="margin-left: 720px;">{{ title }}</div>
+            <div class="title" style="margin-left: 820px;">{{ title }}</div>
             </div>
         </div>
        
         {% if create_post %}
-        <div class="overlay"></div>
-        <div class="create_pannel" style="padding-left: 20px;">
-            <form action="/create" method="POST">
-                <input style="margin-top: 30px; margin-left: -25px; width: 1102px; border-radius: 7px;" type="search" class="small-input-field" placeholder="func_title" maxlength="30" name="name" id="name">
-                <textarea rows="4" cols="121.5" class="description" placeholder="description(600 char)" maxlength="600" name="description" id="description"></textarea>
-                <div class="create" style="margin-left: 977px; margin-top: 3px;"><input type="submit" class="createbtn" style="color: #0dbc79;" value="post"></div>
-                <div class="create" style="margin-left: 1052px; margin-top: 11px;"><a class="createbtn" href="/close" style="color: #f14c4c;">esc</a></div>
-                <input style="margin-top: 3px; margin-right: 827px; width: 300px; border-radius: 7px; height: 30px;" type="search" class="small-input-field" placeholder="type" maxlength="12" name="language" id="language">
-            </form>
-        </div>
+            <div class="overlay"></div>
+            <div class="create_pannel" style="padding-left: 20px;">
+                <form action="/izrada" method="POST">
+                    <input style="margin-top: 30px; width: 1102px; border-radius: 7px;" type="search" class="small-input-field" placeholder="Naziv" maxlength="30" name="name" id="name">
+                    <textarea rows="4" cols="121.5" class="description" placeholder="Opis(600 znakova)" maxlength="600" name="description" id="description"></textarea>
+                    <div class="create" style="margin-left: 977px; margin-top: 3px;"><input type="submit" class="createbtn" style="color: #0dbc79;" value="Izradi"></div>
+                    <div class="create" style="margin-left: 1052px; margin-top: 11px;"><a class="createbtn" href="/zatvaranje" style="color: #f14c4c;">Izlaz</a></div>
+                    <input style="margin-top: 3px; margin-right: 827px; width: 300px; border-radius: 7px; height: 30px;" type="search" class="small-input-field" placeholder="Predmet" maxlength="12" name="language" id="language">
+                </form>
+            </div>
 
         {% else %}
-        <div class="search">
-            <form action="/" method="POST" >
-                <input maxlength="50" style="width: 535px; border-radius: 20px 0px 0px 20px;" type="search" class="small-input-field" placeholder="find_code" name="search" id="search">
+            <div class="search">
+                <form action="/" method="POST" >
+                    <input maxlength="50" style="width: 535px; border-radius: 20px 0px 0px 20px;" type="search" class="small-input-field" placeholder="Pretraži definicije" name="search" id="search">
+                </form>
+            </div>
+
+            <div class="create">
+                <a class="createbtn" href="/otvaranje" style="border: 1px solid #3b3b3b; border-radius: 0px 20px 20px 0px;">Izrada</a>
             </form>
-        </div>
+            </div>
 
-        <div class="create">
-            <a class="createbtn" href="/open" style="border: 1px solid #3b3b3b; border-radius: 0px 20px 20px 0px;">make</a>
-        </form>
-        </div>
-
+        {% endif %}
+        {% if generated %}
+            <div class="flash-cards">
+                <h1 style="color: white; margin-left: 620px; margin-top: 340px; position: absolute; width: 750px;">Ispitaj svoje znanje, klikni na karticu:</h1>
+                <button class="card" style="background-color: #f14c4c;">KARTA</button>
+            </div>
         {% endif %}
         <style>
             /* Styling for the navigation bar on the left */
@@ -62,17 +68,17 @@
                 left: 70px !important;
             }
         </style>
-        <button id="navbar-toggle" class="navbtn" style="position: fixed; top: 0px; left: 0px; z-index: 3;">nav</button>
+        <button id="navbar-toggle" class="navbtn" style="position: fixed; top: 0px; left: 0px; z-index: 3;">Navigacija</button>
     
         <div id="navbar">
-            <h4 id="navText" style="position: fixed; top: -10px; z-index: 2;">Marked Func:</h4>
-            <div id="function-list" style="margin-top: 45px;">
+            <h3 id="navText" style="position: fixed; top: 30px; z-index: 2;">Označene definicije:</h4>
+            <div id="function-list" style="margin-top: 60px;">
                 <table>
                     {% for function in functions %}
                         {% if function.bookmark %}
                             <tr>
-                                <td style="color: #e5d815; font-size: large; padding-right: 120px; padding-top: 15px;">
-                                    <font color="white">/</font><a href="/function/{{function.id}}" style="text-decoration: none; color: #0dbc79;">{{ function.name.lower() }}</a></font>
+                                <td style="font-size: large; padding-right: 100px; padding-top: 15px;">
+                                    <font color="white">-</font><a href="/definicija/{{function.id}}" style="text-decoration: none; color: #0dbc79;">{{ function.name }}</a></font>
                                 </td>
                             </tr>
                         {% endif %}
@@ -84,10 +90,8 @@
         <script>
             const button = document.getElementById("navbar-toggle");
             const navbar = document.getElementById("navbar");
-            const navText = document.getElementById("navText");
 
             button.addEventListener("click", function() {
-                navText.classList.toggle("navText")
                 navbar.classList.toggle("show-navbar")
             });
 
