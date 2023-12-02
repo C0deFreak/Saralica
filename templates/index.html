@@ -34,11 +34,71 @@
 
         {% endif %}
         {% if generated %}
+            <style>
+                .flash-cards {
+                    position: relative;
+                }
+        
+                .card {
+                    background-color: #272727;
+                    transform-style: preserve-3d;
+                    transition: transform 1s ease; /* Define transition properties */
+                    cursor: pointer;
+                    text-align: center;
+                }
+        
+                .card .side {
+                    display: block;
+                    position: absolute;
+                    height: 270px;
+                    width: 400px;
+                    backface-visibility: hidden;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                }
+        
+                .card .back {
+                    transform: rotateY(180deg);
+                }
+        
+                .card.flip {
+                    transform: rotateY(180deg);
+                }
+            </style>
+        
             <div class="flash-cards">
                 <h1 style="color: white; margin-left: 620px; margin-top: 340px; position: absolute; width: 750px;">Ispitaj svoje znanje, klikni na karticu:</h1>
-                <button class="card" style="background-color: #f14c4c;">KARTA</button>
+                <button class="card" onclick="animateButton()">
+                        <div class="side front">{{ marked.name }}</div>
+                        <div class="side back" style="margin-top: -50px;">{{ marked.description }}</div>
+                </button>
             </div>
+        
+            <script>
+                var clickCount = 0;
+
+                function animateButton() {
+                    var cardButton = document.querySelector('.card');
+                    
+                    // Increment the click count
+                    clickCount++;
+
+                    // Toggle 'flip' class to trigger the animation
+                    cardButton.classList.toggle('flip');
+
+                    // Check if the click count is divisible by 2
+                    if (clickCount % 2 === 0) {
+                        // Wait for the animation to complete, then reload the page
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000); // Adjust the delay (in milliseconds) as needed
+                    }
+                }
+            </script>
         {% endif %}
+    
+    
         <style>
             /* Styling for the navigation bar on the left */
             #navbar {

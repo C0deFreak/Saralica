@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
+import random
 
 
 app = Flask(__name__)
@@ -29,10 +29,15 @@ class FunctionSite(functionDatabase.Model):
 def index():
     functions = FunctionSite.query.order_by(FunctionSite.name).all()
     card_generated = False
+    bookmarked = []
 
     for function in functions:
-        if function.bookmark and not card_generated:
-            card_generated = True
+        if function.bookmark:
+            if not card_generated:
+                card_generated = True
+            bookmarked.append(function)
+
+    marked = random.choice(bookmarked)
 
     if request.method == 'POST':
         global func_search
@@ -43,7 +48,7 @@ def index():
             return 'Error: Pretraga neuspješna :('
 
     else:
-        return render_template('index.html', create_post=create_post, title=title, functions=functions, generated=card_generated)
+        return render_template('index.html', create_post=create_post, title=title, functions=functions, generated=card_generated, marked=marked)
 
 @app.route('/otvaranje')
 def open():
