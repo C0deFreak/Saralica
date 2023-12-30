@@ -11,12 +11,12 @@
         <tr>
             <th style="width: 800px;"></th>
         </tr>
-        {% if not isFound  or functions|length < 1%}
+        {% if not isFound  or functions|length < 1 %}
             <h3 style="text-align: center; color: white;"> Nismo uspjeli pronaći rezultate :( </h4>
             <a class="createbtn" href="/otvaranje" style="border: 1px solid #3b3b3b; margin-left: 810px; border-radius: 0px; font-size: larger;">Izradi novu definiciju!</a>
         {% endif %}
 
-        {% for function in functions %}
+        {% for function in functions|sort(attribute='date_created', reverse=True) %}
             {% if search.lower() == function.name.lower() %}
                 <meta http-equiv="refresh" content="0; /definicija/{{ function.id }}">
             {% elif (search.lower() in function.name.lower() or search.lower() in function.language.lower()) or (function.name.lower() in search.lower() or function.language.lower() in search.lower()) %}

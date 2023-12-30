@@ -30,14 +30,14 @@ def index():
     functions = FunctionSite.query.order_by(FunctionSite.name).all()
     card_generated = False
     bookmarked = []
+    marked = 0
 
     for function in functions:
         if function.bookmark:
             if not card_generated:
                 card_generated = True
             bookmarked.append(function)
-
-    marked = random.choice(bookmarked)
+            marked = random.choice(bookmarked)
 
     if request.method == 'POST':
         global func_search
@@ -109,7 +109,7 @@ def search():
     functions = FunctionSite.query.order_by(FunctionSite.name).all()
 
     for function in functions:
-        if (func_search in function.name or func_search in function.language) or (function.name in func_search or function.language in func_search):
+        if (func_search.lower() in function.name.lower()) or (func_search.lower() in function.language.lower()):
             isFound = True
 
     return render_template('search.html', search=func_search, functions=functions, isFound=isFound)
@@ -145,4 +145,4 @@ def function(id):
     return render_template('function.html', function=function)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
