@@ -7,24 +7,51 @@
 {% block body %}
 <body>
     <div>
-        <div class="maintitle">
-            <div class="title" style="margin-left: 100px; width: 1780px; font-size: 40px;">
-                <font color="#1776ab">{{ function.date_created.date() }}</font><font color="white">/</font>
-                <font color="#e5d815">{{ function.language.upper() }}</font>
-                <font color="white">-</font>
-                <font color="#0dbc79">{{ function.name }}</font>
+        <img src="../static/images/notebooksite.png" height="1000px" style="margin-left: 500px; position: absolute;">
+        <div class="maintitle" style="z-index: 2;"  color="black">
+
+            <div style="margin-left: 625px; width: 1000px; font-size: 37px; margin-top: 60px; position: absolute; font-weight: bolder;">
+                <font>{{ function.name }}</font>
             </div>
-            <div>
-                <h2 style="margin-left: 100px; color: white; margin-top: 150px; position: absolute;">
-                    {{ function.description }} <br>
-                    <div class="create" style="margin-left: 0px; margin-top: 50px;"><a class="createbtn" href="/brisanje/{{function.id}}" style="color: #f14c4c;">obriši</a></div>
-                    <div class="create" style="margin-left: 116px; margin-top: 50px;"><a class="createbtn" href="/uređivanje/{{function.id}}" style="color: #0dbc79;">uredi</a></div>
-                    {% if function.bookmark %}
-                        <div class="create" style="margin-left: 270px; margin-top: 50px;"><a class="createbtn" href="/označivanje/{{function.id}}" style="color: #3b3b3b; border-radius: 15px;">označi</a></div>
-                    {% else %}
-                        <div class="create" style="margin-left: 270px; margin-top: 50px;"><a class="createbtn" href="/označivanje/{{function.id}}" style="color: #e5d815; border-radius: 15px;">označi</a></div>
-                    {% endif %}
-                </h2>    
+
+            <div style="margin-left: 650px; width: 1000px; font-size: 27px; margin-top: 25px;  position: absolute; font-weight: lighter;">
+                <font>{{ function.date_created.date() }}</font>
+            </div>
+
+            <div style="margin-left: 1025px; width: 500px; font-size: 30px; margin-top: 111px;  position: absolute; font-style: italic; font-weight: 600;">
+                <font>{{ function.language.upper() }}</font>
+            </div>
+
+            <div style="z-index: 2;">
+                <h2 style="margin-left: 650px; color: rgb(0, 0, 0); margin-top: 149px; position: absolute; width: 580px; overflow-wrap: break-word; line-height: 38px;">{{ function.description }}</h2>
+
+                <div class="create" style="margin-left: 850px; margin-top: 750px; position: absolute;">
+                    <a href="/brisanje/{{function.id}}">
+                        <img src="../static/images/eraser.png" height="40px" width="80px">
+                        <span class="createtext">Obriši</span>
+                    </a>
+                </div>
+                <div class="create" style="margin-left: 950px; margin-top: 750px;  position: absolute;">
+                    <a href="/uređivanje/{{function.id}}">
+                        <img src="../static/images/CreateBTN.png" height="40px" width="80px">
+                        <span class="createtext">Uredi</span>
+                    </a>
+                </div>
+                {% if function.bookmark %}
+                    <div class="create" style="margin-left: 1200px; margin-top: 20px;  position: absolute;">
+                        <a href="/označivanje/{{function.id}}">
+                            <img src="../static/images/UnmarkBTN.png" height="40px" width="80px">
+                            <span class="createtext">Poništi</span>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="create" style="margin-left: 1200px; margin-top: 20px;  position: absolute;">
+                        <a href="/označivanje/{{function.id}}">
+                            <img src="../static/images/BookmarkBTN.png" height="40px" width="80px">
+                            <span class="createtext">Označi</span>
+                        </a>
+                    </div>
+                {% endif %}    
             </div>
         </div>
        

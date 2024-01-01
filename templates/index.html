@@ -16,10 +16,10 @@
                     <input style="margin-top: 30px; width: 1102px; border-radius: 7px; z-index: 6; position: absolute;" type="search" class="small-input-field" placeholder="Naziv" maxlength="30" name="name" id="name">
                     <img src="../static/images/SearchBAR.png" style="position: absolute; width: 535px; height: 40; z-index: 5; margin-top: 30px;">
                     <textarea rows="4" cols="121.5" class="description" placeholder="Opis(600 znakova)" maxlength="600" name="description" id="description" style="margin-top: 100px; position: absolute;"></textarea>
-                    <div class="create" style="margin-left: 967px; margin-top: 523px; position: absolute;">
-                        <input type="submit" class="createbtn" style="color: transparent; position: absolute; background: transparent; border: none; outline: none;">
-                        <img src="../static/images/CreateBTN.png" height="40px" width="80px">
-                        <span class="createtext">Izrada</span>
+                    <div class="create" style="margin-left: 967px; margin-top: 523px; position: absolute; cursor: pointer;">
+                        <img src="../static/images/CreateBTN.png" height="40px" width="80px" style="z-index: 4;">
+                        <span class="createtext" style="z-index: 5;">Izrada</span>
+                        <input type="submit" class="createbtn" style="color: transparent; position: absolute; background: transparent; border: none; outline: none; z-index: 6; margin-left: -80px;">
                     </div>
                     <div class="create" style="margin-left: 1052px; margin-top: 524px; position: absolute;">
                         <a href="/zatvaranje">
@@ -87,8 +87,8 @@
             <div class="flash-cards">
                 <img src="../static/images/lik.png" style=" margin-left: 970px; margin-top: 580px; position: absolute; width: 400px;">
                 <button class="card" onclick="animateButton()">
-                        <div class="side front">{{ marked.name }}</div>
-                        <div class="side back" style="margin-top: -50px;">{{ marked.description }}</div>
+                        <div class="side front" style=" font-size: large; color: #d84652; font-weight: bold;">{{ marked.name }}</div>
+                        <div class="side back" style="margin-top: -75px; color: #3d5aff; font-size: 14px;">{{ marked.description }}</div>
                 </button>
             </div>
         
@@ -122,7 +122,8 @@
                 position: fixed;
                 top: 0;
                 left: -250px; /* Initially position the navbar off-screen */
-                background-color: #333; /* Set your desired background color */
+                background: url(../static/images/pinboard.jpg) no-repeat;
+                background-size: cover;
                 color: white;
                 width: 250px; /* Set your desired width */
                 height: 100%; /* Make it cover the entire height of the viewport */
@@ -145,17 +146,19 @@
                 left: 70px !important;
             }
         </style>
-        <button id="navbar-toggle" class="navbtn" style="position: fixed; top: 0px; left: 0px; z-index: 3;">Navigacija</button>
+        <button id="navbar-toggle" class="navbtn" style="position: absolute; top: 0px; left: 0px; z-index: 3;">
+            <img src="../static/images/BookmarkBTN.png" height="40px" width="100px" style="position: absolute; z-index: 4; top: 0px; left: 0px;">
+        </button>
     
         <div id="navbar">
-            <h3 id="navText" style="position: fixed; top: 30px; z-index: 2;">Označene definicije:</h4>
             <div id="function-list" style="margin-top: 60px;">
                 <table>
                     {% for function in functions %}
                         {% if function.bookmark %}
                             <tr>
-                                <td style="font-size: large; padding-right: 100px; padding-top: 15px;">
-                                    <font color="white">-</font><a href="/definicija/{{function.id}}" style="text-decoration: none; color: #0dbc79;">{{ function.name }}</a></font>
+                                <td style="font-size: large; padding-right: 200px; padding-top: 25px;">
+                                    <img src="../static/images/SearchBAR.png" style="position: absolute; width: 315px; height: 40; z-index: 1; padding-right: 20px;">
+                                    <font color="white">-</font><a href="/definicija/{{function.id}}" style="text-decoration: none; color: black; position: absolute; z-index: 2; white-space: nowrap; font-weight: bold;">{{ function.name }}</a></font>
                                 </td>
                             </tr>
                         {% endif %}

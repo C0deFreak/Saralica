@@ -6,7 +6,7 @@
 
 {% block body %}
 <div class="content">
-    <h1 style="text-align: center; color: #e5d815; font-size: xx-large;">Rezultati za "{{ search }}"</h1>
+    <h1 style="text-align: center; color: #000000; font-size: xx-large;">Rezultati za "{{ search }}"</h1>
     <table>
         <tr>
             <th style="width: 800px;"></th>
@@ -20,13 +20,25 @@
             {% if search.lower() == function.name.lower() %}
                 <meta http-equiv="refresh" content="0; /definicija/{{ function.id }}">
             {% elif (search.lower() in function.name.lower() or search.lower() in function.language.lower()) or (function.name.lower() in search.lower() or function.language.lower() in search.lower()) %}
-                <tr style="text-align: center;">
-                    <td style="color: #e5d815; font-size: x-large; text-align: center;">
-                        <font color="#1776ab">{{ function.date_created.date() }}</font><font color="white">/</font>
-                        <font color="#e5d815">{{ function.language.upper() }}</font>
-                        <font color="white">-</font>
-                        <font color="#0dbc79"><a href="/definicija/{{function.id}}" style="text-decoration: none; color: #0dbc79;">{{ function.name }}</a></font>
-                    </td>
+                <tr>
+                    <div style="position: relative; display: inline-block;">
+                        <a href="/definicija/{{function.id}}" style="text-decoration: none;">
+
+                            <img src="../static/images/note.png" style="width: 315px; height: 40; z-index: 1;  padding-left: 52px; padding-bottom: 52px;">
+                            
+                            <div style="position: absolute; bottom: 225px; left: 150px; z-index: 2; color: black; font-weight: 700; font-size: larger;">
+                                <font>{{ function.language.upper() }}</font>
+                            </div>
+
+                            <div style="position: absolute; bottom: 340px; left: 55px; z-index: 2; color: black; font-weight: 800; font-size: 18px; ">
+                                <font>{{ function.name }}</font>
+                            </div>
+
+                            <div style="position: absolute; bottom: 250px; left: 150px; z-index: 2; color: black; font-weight: 700; font-size: larger;">
+                                <font>{{ function.date_created.date() }}</font>
+                            </div>
+                        </a>
+                    </div>
                 </tr>
             {% endif %}
         {% endfor %}
