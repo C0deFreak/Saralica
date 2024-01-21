@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<!-- Slika kutije za kartice -->
+<img src="../static/images/kutija.png" width="715px" height="435px" style="margin-top: 540px; position: absolute; margin-left: 627px; z-index: 3;">
+
+<!-- Stil za flash kartice -->
+<style>
+    .flash-cards {
+        position: relative;
+    }
+
+    .card {
+        background: url(../static/images/card.png);
+        transform-style: preserve-3d;
+        transition: transform 1s ease;
+        cursor: pointer;
+        text-align: center;
+        width: 615px;
+        height: 395px;
+    }
+
+    .card .side {
+        display: block;
+        position: absolute;
+        height: 395px;
+        width: 615px;
+        backface-visibility: hidden;
+        align-items: center;
+        justify-content: center;
+        color: black;
+        font-weight: bold;
+    }
+
+    .card .back {
+        transform: rotateY(180deg);
+    }
+
+    .card.rotate {
+        transform: rotateY(180deg);
+    }
+
+    .card.translate {
+        transition: transform 0.5s ease-in-out;
+        transform: translateY(460px);
+    }
+
+    .card.translate.delay {
+        transition-delay: 0.5s;
+    }
+</style>
+
+<!-- HTML za flash kartice -->
+<div class="flash-cards">
+    <button class="card" onclick="animateButton()">
+        <!-- Prednja strana kartice -->
+        <div class="side front" style="font-size: x-large; color: black; font-weight: bold;  height: 200px;">{{ marked.name }}</div>
+        <!-- Zadnja strana kartice -->
+        <div class="side back" style="color: black; font-size: 14px; height: 200px; width: 550px; margin-top: -50px; overflow-wrap: break-word; margin-left: 25px;">{{ marked.description }}</div>
+    </button>
+</div>
+
+<!-- JavaScript za animaciju kartice -->
+<script>
+    var cardButton = document.querySelector('.card');
+    var clickCount = 0;
+
+    
+
+    function animateButton() {
+       
+        clickCount++;
+
+        if (clickCount % 2 === 1) {
+            // Rotacija kartice
+            cardButton.classList.add('rotate');
+        } else {
+            // Micanje kartice sa animacijom
+            cardButton.classList.add('translate');
+            
+            // Osvježavanje stranice nakon kraja animacije
+            setTimeout(function() {
+                location.reload();
+            }, 1000);
+        }
+    }
+</script>
+
+{% endblock %}

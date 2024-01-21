@@ -5,56 +5,64 @@
 {% endblock %}
 
 {% block body %}
+<!-- Tijelo stranice -->
 <body>
+    <!-- Slika s naslovnicom -->
     <div>
         <img src="../static/images/notebooksite.png" height="1000px" style="margin-left: 500px; position: absolute;">
-        <div class="maintitle" style="z-index: 2;"  color="black">
 
+        <!-- Glavni naslov i informacije -->
+        <div class="maintitle" style="z-index: 2;" color="black">
+            <!-- Naziv pojma -->
             <div style="margin-left: 625px; width: 1000px; font-size: 37px; margin-top: 60px; position: absolute; font-weight: bolder;">
                 <font>{{ function.name }}</font>
             </div>
 
-            <div style="margin-left: 650px; width: 1000px; font-size: 27px; margin-top: 25px;  position: absolute; font-weight: lighter;">
+            <!-- Datum kreiranja funkcije -->
+            <div style="margin-left: 650px; width: 1000px; font-size: 27px; margin-top: 25px; position: absolute; font-weight: lighter;">
                 <font>{{ function.date_created.date() }}</font>
             </div>
 
-            <div style="margin-left: 1025px; width: 500px; font-size: 30px; margin-top: 111px;  position: absolute; font-style: italic; font-weight: 600;">
+            <!-- Predmet pojma -->
+            <div style="margin-left: 1025px; width: 500px; font-size: 30px; margin-top: 111px; position: absolute; font-style: italic; font-weight: 600;">
                 <font>{{ function.language.upper() }}</font>
             </div>
 
+            <!-- Opis pojam -->
             <div style="z-index: 2;">
                 <h2 style="margin-left: 650px; color: rgb(0, 0, 0); margin-top: 149px; position: absolute; width: 580px; overflow-wrap: break-word; line-height: 38px;">{{ function.description }}</h2>
 
+                <!-- Gumbeva za brisanje, uređivanje i označavanje -->
                 <div class="create" style="margin-left: 850px; margin-top: 750px; position: absolute;">
                     <a href="/brisanje/{{function.id}}">
                         <img src="../static/images/eraser.png" height="40px" width="80px">
                         <span class="createtext">Obriši</span>
                     </a>
                 </div>
-                <div class="create" style="margin-left: 950px; margin-top: 750px;  position: absolute;">
+                <div class="create" style="margin-left: 950px; margin-top: 750px; position: absolute;">
                     <a href="/uređivanje/{{function.id}}">
                         <img src="../static/images/CreateBTN.png" height="40px" width="80px">
                         <span class="createtext">Uredi</span>
                     </a>
                 </div>
+                <!-- Provjera označavanja pojma -->
                 {% if function.bookmark %}
-                    <div class="create" style="margin-left: 1200px; margin-top: 20px;  position: absolute;">
+                    <div class="create" style="margin-left: 1200px; margin-top: 20px; position: absolute;">
                         <a href="/označivanje/{{function.id}}">
                             <img src="../static/images/UnmarkBTN.png" height="40px" width="80px">
                             <span class="createtext">Poništi</span>
                         </a>
                     </div>
                 {% else %}
-                    <div class="create" style="margin-left: 1200px; margin-top: 20px;  position: absolute;">
+                    <div class="create" style="margin-left: 1200px; margin-top: 20px; position: absolute;">
                         <a href="/označivanje/{{function.id}}">
                             <img src="../static/images/BookmarkBTN.png" height="40px" width="80px">
                             <span class="createtext">Označi</span>
                         </a>
                     </div>
-                {% endif %}    
+                {% endif %}
             </div>
         </div>
-       
     </div>
 </body>
 {% endblock %}

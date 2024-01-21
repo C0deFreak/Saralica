@@ -1,3 +1,4 @@
+/* Postavljanje fonta za cijelu stranicu */
 body {
     font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
     background-image: url('../images/Background.jpg');
@@ -6,9 +7,12 @@ body {
     background-size: cover;
 }
 
+/* Stilizacija za margin na formi */
 form {
     margin-top: 20px;
 }
+
+/* Stilizacija za naslov */
 .title {
     position: absolute;
     height: 500px;
@@ -16,43 +20,29 @@ form {
     margin-top: 2px;
     margin-left: 700px;
 }
+
+/* Stilizacija za placeholder u input poljima */
 ::placeholder {
     color: #4d4d4d;
     font-weight: bold;
     opacity: 1;
-  }
+}
 
-
+/* Stilizacija za tabele */
 table {
     border-collapse: collapse;
-    margin-left: auto; 
+    margin-left: auto;
     margin-right: auto;
 }
 
-
-
-.sitesnum {
-    text-align: center;
-    color: white;
-    font-size: 100px;
-    position: absolute;
-    margin-top: 50px;
-    margin-left: 860px;
-    
-}
-.articles {
-    text-align: center;
-    color: white;
-    font-size: 15px;
-    margin-top: -15px;
-    margin-left: 80px;
-    
-}
+/* Stilizacija za gumba "create" */
 .create {
     margin-left: 1182px;
     margin-top: 220px;
     position: absolute;
 }
+
+/* Stilizacija za gumba "createbtn" */
 .createbtn {
     text-align: center;
     background-color: #272727;
@@ -61,39 +51,49 @@ table {
     border-radius: 25px;
     height: 40px;
     padding-top: 9px;
-    padding-bottom: 10px; 
-    padding-left: 16px; 
+    padding-bottom: 10px;
+    padding-left: 16px;
     padding-right: 16px;
     font-weight: bolder;
     color: white;
     text-decoration: none;
 }
+
+/* Stilizacija za tekst unutar gumba "createtext" */
 .createtext {
     text-align: center;
     position: absolute;
-    top: 40%; left: 50%;
+    top: 40%;
+    left: 50%;
     transform: translate(-50%, -50%);
     font-weight: bolder;
     color: white;
-    font-weight: bold; 
     text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
     text-decoration: none;
 }
+
+/* Stilizacija za gumb "navbtn" */
 .navbtn {
     background: transparent;
     border: none;
     height: 40px;
 }
+
+/* Stilizacija za pretragu */
 .search {
     margin-top: 200px;
     margin-left: 645px;
     position: absolute;
 }
+
+/* Stilizacija za input polje unutar "create-input" */
 .create-input {
     margin-left: 700px;
     position: absolute;
 }
-.small-input-field { 
+
+/* Stilizacija za mala input polja */
+.small-input-field {
     height: 40px;
     padding-left: 17px;
     background: transparent;
@@ -102,19 +102,21 @@ table {
     font-size: large;
     font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
 }
-input, select, textarea{
+
+/* Stilizacija za input, select, textarea elemente */
+input, select, textarea {
     color: rgb(0, 0, 0);
     font-weight: bold;
 }
+
+/* Stilizacija za fokusirana input polja */
 textarea:focus, input:focus {
     color: rgb(0, 0, 0);
     font-weight: bold;
 }
 
-
-
+/* Stilizacija za panel za kreiranje */
 .create_pannel {
-
     position: absolute;
     margin-top: 266px;
     margin-left: 384px;
@@ -123,6 +125,8 @@ textarea:focus, input:focus {
     z-index: 5;
     background: transparent;
 }
+
+/* Stilizacija za opis unutar "description" */
 .description {
     height: 400px;
     padding-left: 17px;
@@ -133,14 +137,15 @@ textarea:focus, input:focus {
     font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
     border: none;
     outline: none;
-    color:#000000;
+    color: #000000;
 }
 
+/* Stilizacija za "card" element */
 .card {
-    height: 270px;
-    width: 420px;
-    margin-left: 750px;
-    margin-top: 400px;
+    height: 395px;
+    width: 615px;
+    margin-left: 645px;
+    margin-top: 100px;
     border: none;
     outline: none;
 }
