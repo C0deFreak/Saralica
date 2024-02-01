@@ -100,7 +100,6 @@ table {
     border: none;
     outline: none;
     font-size: large;
-    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
 }
 
 /* Stilizacija za input, select, textarea elemente */
@@ -148,4 +147,12 @@ textarea:focus, input:focus {
     margin-top: 100px;
     border: none;
     outline: none;
+}
+
+.markButton {
+    height: 40px; 
+    width: 170px;
+    position: absolute; 
+    left: 0px; 
+    z-index: 3;
 }

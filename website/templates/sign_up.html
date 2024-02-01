@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form method="POST">
+    <h3>E mail</h3>
+    <label for="email"> Email Adress</label>
+    <input type="email" id="email" name="email" placeholder="Enter Email">
+
+    <h3>Ime</h3>
+    <label for="username">username</label>
+    <input type="text" id="username" name="username" placeholder="Enter username">
+
+    <h3>Pass</h3>
+    <label for="password1">pass1</label>
+    <input type="password" id="password1" name="password1" placeholder="Enter pass1">
+    <label for="password2">pass2</label>
+    <input type="password" id="password2" name="password2" placeholder="Enter pass2">
+    <br />
+    <button type="submit">Button</button>
+</form>
+{% endblock %}
