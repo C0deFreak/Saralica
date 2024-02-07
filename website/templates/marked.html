@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<!-- Glavni sadržaj stranice -->
+<div class="content">
+
+    <!-- Tabela za prikaz rezultata -->
+    <table>
+        <tr>
+            <th style="width: 800px;"></th>
+        </tr>
+        <!-- Prikaz rezultata pretrage -->
+        {% for definition in bookmarked %}
+            <tr>
+                <div style="position: relative; display: inline-block;">
+                    <a href="/definicija/{{ definition.id }}" style="text-decoration: none;">
+
+                        <!-- Slika za svaku definiciju -->
+                        <img src="../static/images/note.png" style="width: 315px; height: 40; z-index: 1;  padding-left: 52px; padding-bottom: 52px;">
+                        
+                        <!-- Prikaz jezika, naziva i datuma kreiranja -->
+                        <div style="position: absolute; bottom: 225px; left: 150px; z-index: 2; color: black; font-weight: 700; font-size: larger;">
+                            <font>{{ definition.subject.upper() }}</font>
+                        </div>
+
+                        <div style="position: absolute; bottom: 340px; left: 55px; z-index: 2; color: black; font-weight: 800; font-size: 18px; ">
+                            <font>{{ definition.name }}</font>
+                        </div>
+
+                        <div style="position: absolute; bottom: 250px; left: 150px; z-index: 2; color: black; font-weight: 700; font-size: larger;">
+                            <font>{{ definition.date_created.date() }}</font>
+                        </div>
+                    </a>
+                </div>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

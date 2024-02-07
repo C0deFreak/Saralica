@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<head>
+    <script>
+        function refreshQuiz() {
+            window.location.reload();
+        }
+    </script>
+</head>
+<body>
+    <form method="post" onsubmit="return false;">
+        {% for definition in definitions %}
+            <p>{{ definition.description }}</p>
+            <label for="user_answer">Name: </label>
+            <input type="text" id="user_answer" name="user_answer" required>
+            <input type="hidden" name="correct_answer" value="{{ definition.name }}">
+            <br>
+        {% endfor %}
+        <br>
+        <input type="submit" value="Check Answer" onclick="checkAnswer()">
+    </form>
+    <p id="result"></p>
+    <button onclick="refreshQuiz()">Get a New Quiz</button>
+
+    <script>
+        function checkAnswer() {
+            var userAnswer = document.getElementById('user_answer').value;
+            var correctAnswer = document.getElementsByName('correct_answer')[0].value;
+
+            if (userAnswer === correctAnswer) {
+                document.getElementById('result').innerText = 'Correct!';
+            } else {
+                document.getElementById('result').innerText = 'Incorrect. Try again.';
+            }
+        }
+    </script>
+</body>
+</html>
+
+{% endblock %}

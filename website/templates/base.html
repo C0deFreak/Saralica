@@ -2,7 +2,7 @@
 <html lang="hr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA:Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     {% block head %}{% endblock %}
@@ -47,8 +47,9 @@
         #navbar > ul.vertical > li > a > img {
             width: 50px; 
             height: 50px;
-            margin-top: 138px; 
-            margin-bottom: 138px;
+            margin-top: 7.2vw; 
+            margin-bottom: 7.2vw;
+            
         }
     </style>
     
@@ -57,11 +58,11 @@
         <ul class="vertical ex">
             {% if user.is_authenticated %}
                 <li><a href="/"><img src="../static/images/HOMEbtn.png"></a></li>
-                <li><a href="javascript:void(0)"><img src="../static/images/MARKEDbtn.png"></a></li>
+                <li><a href="/zabilježeno"><img src="../static/images/MARKEDbtn.png"></a></li>
                 <li><a href="/auth/logout"><img src="../static/images/LOGOUTbtn.png"></a></li>
             {% else %}
-                <li><a href="/auth/login"><img src="../static/images/LOGINbtn.png" style="margin-top: 221px; margin-bottom: 221px;"></a></li>
-                <li><a href="/auth/sign-up"><img src="../static/images/SIGNUPbtn.png" style="margin-top: 221px; margin-bottom: 221px;"></a></li>
+                <li><a href="/auth/login"><img src="../static/images/LOGINbtn.png" style="margin-top: 11.5vw; margin-bottom: 11.5vw;"></a></li>
+                <li><a href="/auth/sign-up"><img src="../static/images/SIGNUPbtn.png" style="margin-top: 11.5vw; margin-bottom: 11.5vw;"></a></li>
             {% endif %}
         </ul>
         
@@ -79,16 +80,29 @@
             </table>
         </div>
     </div>
+    <style>
+        .alert {
+            height: 40px;
+            position: fixed; /* Position it fixed to the top */
+            top: 0; /* Align it to the top */
+            left: 0; /* Align it to the left */
+            text-align: center;
+            line-height: 40px; 
+            font-weight: bold;
+            box-sizing: border-box; /* Include padding in width */
+            width: 100vw; /* Full width of the viewport */
+        }
+    </style>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
                 {% if category == 'error' %}
-                    <div role="alert">
+                    <div class="alert" style="color: #721c24; background-color: #f8d7da;">
                         {{ message }}
                     </div>
                 {% else %}
-                    <div role="alert">
+                    <div class="alert" style="color: #155724; background-color: #d4edda;">
                         {{ message }}
                     </div>
                 {% endif %}

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect
+from flask import Blueprint, render_template, request, flash, redirect, jsonify
 from .models import Definition
 from flask_login import login_required, current_user
 from . import db
@@ -92,6 +92,7 @@ def create():
     else:
         return render_template('index.html')
 
+
 # Prikazuje stranicu sa rezultatima pretrage
 @views.route('/pretraga')
 @login_required
@@ -100,18 +101,28 @@ def search():
     global isFound
     isFound = False
 
-    card_generated = False
-
-    for definition in current_user.definitions:
-        if definition.bookmark:
-            if not card_generated:
-                card_generated = True
-
     for definition in current_user.definitions:
         if (def_search.lower() in definition.name.lower()) or (def_search.lower() in definition.subject.lower()):
             isFound = True
 
-    return render_template('search.html', search=def_search, isFound=isFound, user=current_user, generated=card_generated)
+    return render_template('search.html', search=def_search, isFound=isFound, user=current_user)
+
+
+@views.route('/zabilježeno')
+@login_required
+def marked():
+    definitions = current_user.definitions
+    bookmarked = []
+
+    for definition in definitions:
+        if definition.bookmark:
+            bookmarked.append(definition)
+
+    if len(bookmarked) < 1:
+        return 'Error: Nema kartica :('
+
+    else:
+        return render_template('marked.html', bookmarked=bookmarked, user=current_user)
 
 # Briše funkciju
 @views.route('/brisanje/<int:id>')
@@ -163,22 +174,40 @@ def definition(id):
 # Prikazuje flash kartice za omiljene funkcije
 @views.route('/flash-kartice')
 @login_required
-def flash():
+def flash_card():
     definitions = current_user.definitions
-    card_generated = False
     bookmarked = []
-    marked = 0
 
     for definition in definitions:
         if definition.bookmark:
-            if not card_generated:
-                card_generated = True
             bookmarked.append(definition)
-            marked = random.choice(bookmarked)
 
-    if not card_generated:
+    if len(bookmarked) < 1:
         return 'Error: Nema kartica :('
 
     else:
-        return render_template('flash.html', marked=marked, user=current_user)
+        return render_template('flash.html', marked=random.choice(bookmarked), user=current_user)
 
+# Prikazuje flash kartice za omiljene funkcije
+@views.route('/kviz', methods=['GET', 'POST'])
+@login_required
+def quiz():
+    definitions = current_user.definitions
+    bookmarked = [definition for definition in definitions if definition.bookmark]
+
+    if len(bookmarked) < 1:
+        return 'Error: Nema kartica :('
+
+    else:
+        if request.method == 'POST':
+
+            user_answer = request.form.get('user_answer')
+            correct_answer = request.form.get('correct_answer')
+            if user_answer and correct_answer and user_answer == correct_answer:
+                result = "Correct!"
+            else:
+                result = "Incorrect. Try again."
+
+            return render_template('quiz.html', definitions=[random.choice(bookmarked)], result=result, user=current_user)
+
+        return render_template('quiz.html', definitions=[random.choice(bookmarked)], user=current_user)
