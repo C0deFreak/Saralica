@@ -68,7 +68,7 @@ table {
     transform: translate(-50%, -50%);
     font-weight: bolder;
     color: white;
-    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     text-decoration: none;
 }
 
@@ -155,4 +155,10 @@ textarea:focus, input:focus {
     position: absolute; 
     left: 0px; 
     z-index: 3;
+}
+
+.result-text {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    z-index: 2;
+    position: relative;
 }

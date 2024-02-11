@@ -4,13 +4,10 @@
 <!-- Glavni sadržaj stranice -->
 <div class="content">
     <!-- Naslov rezultata pretrage -->
-    <h1 style="text-align: center; color: #000000; font-size: xx-large;">Rezultati za "{{ search }}"</h1>
+    <h1 style="text-align: center; color: #f1c3e0; font-size: 37px; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Rezultati za "{{ search }}"</h1>
 
     <!-- Tabela za prikaz rezultata -->
-    <table>
-        <tr>
-            <th style="width: 800px;"></th>
-        </tr>
+    <table style="border-spacing: 0 0px;">
         {% if not isFound or user.definitions|length < 1 %}
             <h3 style="text-align: center; color: white;">Nismo uspjeli pronaći rezultate :(</h4>
             <a class="createbtn" href="/otvaranje" style="border: 1px solid #3b3b3b; margin-left: 810px; border-radius: 0px; font-size: larger;">Izradi novu definiciju!</a>
@@ -24,26 +21,39 @@
             {% elif (search.lower() in definition.name.lower() or search.lower() in definition.subject.lower()) or (definition.name.lower() in search.lower() or definition.subject.lower() in search.lower()) %}
                 <!-- Ako je pronađena odgovarajuća definicija, prikaži je -->
                 <tr>
-                    <div style="position: relative; display: inline-block;">
-                        <a href="/definicija/{{ definition.id }}" style="text-decoration: none;">
+                    <td>
+                        <div style="position: relative; height: 150px;">
+                            <a href="/definicija/{{ definition.id }}" style="text-decoration: none;">
+    
+                                <!-- Slika za svaku definiciju -->
+                                <img src="../static/images/note.png" style="width: 1000px; height: 175px; z-index: 1;  padding-left: 52px; padding-bottom: 52px;">
+                                
+                                <!-- Prikaz jezika, naziva i datuma kreiranja -->
+                                <div class="result-text" style="bottom: 170px; left: 185px; color: rgb(220, 220, 220); font-weight: 300; font-size: 17px; font-style: italic;">
+                                    <font>{{ definition.subject.upper() }}</font>
+                                </div>
+    
+                                <div class="result-text" style="bottom: 220px; left: 85px; color: #6993CB; font-weight: 800; font-size: 23px; ">
+                                    <font>{{ definition.name }}</font>
+                                    {% if definition.bookmark %}
+                                        <img src="../static/images/MARKEDbtn.png" style="width: 50px; height: 50px; z-index: 2; position: absolute; left: 875px; bottom: -50px;">
+                                    {% endif %}
+                                </div>
+    
+                                <div class="result-text" style="bottom: 216px; left: 85px; color: rgb(220, 220, 220); font-weight: lighter; font-size: 15px;">
+                                    <font>{{ definition.date_created.date() }}, </font>
+                                </div>
+    
+                                <div style="position: relative; bottom: 206px; left: 85px; z-index: 2; color: white; font-weight: lighter; font-size: 12px; overflow-wrap: break-word; width: 850px;">
+                                    <font><font>{{ definition.description[:500] }}{% if definition.description|length > 500 %}...{% endif %}</font></font>
+                                </div>
 
-                            <!-- Slika za svaku definiciju -->
-                            <img src="../static/images/note.png" style="width: 315px; height: 40; z-index: 1;  padding-left: 52px; padding-bottom: 52px;">
-                            
-                            <!-- Prikaz jezika, naziva i datuma kreiranja -->
-                            <div style="position: absolute; bottom: 225px; left: 150px; z-index: 2; color: black; font-weight: 700; font-size: larger;">
-                                <font>{{ definition.subject.upper() }}</font>
-                            </div>
+                                
+                            </a>
+                        </div>
+                        
 
-                            <div style="position: absolute; bottom: 340px; left: 55px; z-index: 2; color: black; font-weight: 800; font-size: 18px; ">
-                                <font>{{ definition.name }}</font>
-                            </div>
-
-                            <div style="position: absolute; bottom: 250px; left: 150px; z-index: 2; color: black; font-weight: 700; font-size: larger;">
-                                <font>{{ definition.date_created.date() }}</font>
-                            </div>
-                        </a>
-                    </div>
+                    </td>
                 </tr>
             {% endif %}
         {% endfor %}

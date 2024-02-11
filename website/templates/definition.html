@@ -9,28 +9,28 @@
 <body>
     <!-- Slika s naslovnicom -->
     <div>
-        <img src="../static/images/notebooksite.png" height="1000px" style="margin-left: 500px; position: absolute;">
+        <img src="../static/images/notebooksite2.png" height="1000px" style="margin-left: 500px; position: absolute;">
 
         <!-- Glavni naslov i informacije -->
         <div class="maintitle" style="z-index: 2;" color="black">
             <!-- Naziv pojma -->
-            <div style="margin-left: 640px; width: 1000px; font-size: 36px; margin-top: 60px; position: absolute; font-weight: bolder;">
+            <div style="margin-left: 550px; width: 585px; font-size: 30px; margin-top: 40px; position: absolute; font-weight: bolder; overflow-wrap: break-word;  line-height: 29px;">
                 <font>{{ definition.name }}</font>
             </div>
 
             <!-- Datum kreiranja funkcije -->
-            <div style="margin-left: 650px; width: 1000px; font-size: 27px; margin-top: 25px; position: absolute; font-weight: lighter;">
+            <div style="margin-left: 550px; width: 1000px; font-size: 18px; margin-top: 20px; position: absolute; font-weight: lighter;">
                 <font>{{ definition.date_created.date() }}</font>
             </div>
 
             <!-- Predmet pojma -->
-            <div style="margin-left: 1025px; width: 500px; font-size: 30px; margin-top: 111px; position: absolute; font-style: italic; font-weight: 600;">
+            <div style="margin-left: 725px; width: 500px; font-size: 30px; margin-top: 111px; position: absolute; font-style: italic; font-weight: 550; text-align: right;">
                 <font>{{ definition.subject.upper() }}</font>
             </div>
 
             <!-- Opis pojam -->
             <div style="z-index: 2;">
-                <h2 style="margin-left: 650px; color: rgb(0, 0, 0); margin-top: 149px; position: absolute; width: 580px; overflow-wrap: break-word; line-height: 34.5px; font-weight: 500;">{{ definition.description }}</h2>
+                <h2 style="margin-left: 540px; color: rgb(0, 0, 0); margin-top: 160px; position: absolute; width: 700px; overflow-wrap: break-word; line-height: 27px; font-weight: 500;">{{ definition.description }}</h2>
 
                 <!-- Gumbeva za brisanje, uređivanje i označavanje -->
                 <div class="create" style="margin-left: 850px; margin-top: 750px; position: absolute;">
@@ -47,17 +47,17 @@
                 </div>
                 <!-- Provjera označavanja pojma -->
                 {% if definition.bookmark %}
-                    <div class="create" style="margin-left: 1100px; margin-top: 20px; position: absolute;">
+                    <div class="create" style="margin-left: 1150px; margin-top: 20px; position: absolute;">
                         <a href="/označivanje/{{definition.id}}">
-                            <img src="../static/images/GRAYmark.png" height="40px" width="170px">
-                            <span class="createtext" style="margin-left: -7px;">Poništi</span>
+                            <img src="../static/images/Unmark.png" height="80px" width="80px">
+                            <span class="createtext" style="margin-top: 5px;">Poništi</span>
                         </a>
                     </div>
                 {% else %}
-                    <div class="create" style="margin-left: 1100px; margin-top: 20px; position: absolute;">
+                    <div class="create" style="margin-left: 1150px; margin-top: 20px; position: absolute;">
                         <a href="/označivanje/{{definition.id}}">
-                            <img src="../static/images/REDmark.png" height="40px" width="170px">
-                            <span class="createtext">Označi</span>
+                            <img src="../static/images/MARKEDbtn.png" height="80px" width="80px">
+                            <span class="createtext" style="margin-top: 5px;">Označi</span>
                         </a>
                     </div>
                 {% endif %}

@@ -44,13 +44,13 @@ def sign_up():
         if user:
             flash('Korisnik već postoji', category='error')
         elif len(email) < 4:
-            flash('Krivi e-mail', category='error')
+            flash('Nepostojeća E-mail adresa', category='error')
         elif len(username) < 2:
-            flash('Kratko ime', category='error')
+            flash('Korisničko ime je prekratko', category='error')
         elif password1 != password2:
-            flash('Kriva lozinka', category='error')
+            flash('Lozinke se ne podudaraju', category='error')
         elif len(password1) < 7:
-            flash('kratka lozinka', category='error')
+            flash('Lozinka je prekratka', category='error')
         else:
             new_user = User(email=email, username=username, password=generate_password_hash(password1))
             db.session.add(new_user)

@@ -54,9 +54,9 @@
 <div class="flash-cards">
     <button class="card" onclick="animateButton()">
         <!-- Prednja strana kartice -->
-        <div class="side front" style="font-size: x-large; color: black; font-weight: bold;  height: 200px;">{{ marked.name }}</div>
+        <div class="side front" style="font-size: x-large; color: black; font-weight: bold;  height: 200px; overflow-wrap: break-word; width: 530px; margin-left: 30px;">{{ marked.name }}</div>
         <!-- Zadnja strana kartice -->
-        <div class="side back" style="color: black; font-size: 14px; height: 200px; width: 550px; margin-top: -50px; overflow-wrap: break-word; margin-left: 25px;">{{ marked.description }}</div>
+        <div class="side back" style="color: black; font-size: 11.5px; height: 200px; width: 530px; margin-top: -80px; overflow-wrap: break-word; margin-left: 35px;">{{ marked.description }}</div>
     </button>
 </div>
 
