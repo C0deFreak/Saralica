@@ -2,37 +2,86 @@
 
 {% block body %}
 <head>
-    <script>
-        function refreshQuiz() {
-            window.location.reload();
+    <!-- Stilovi za animacije i placeholder teksta -->
+    <style>
+        .hidden {
+            display: none;
         }
-    </script>
+        .animate-x {
+            transition: transform 0.75s ease;
+        }
+        .animate-check {
+            transition: transform 0.75s ease;
+        }
+
+        ::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+    </style>
 </head>
 <body>
+    <!-- Forma za unos odgovora na pitanje -->
     <form method="post" onsubmit="return false;">
         {% for definition in definitions %}
-            <p>{{ definition.description }}</p>
-            <label for="user_answer">Name: </label>
-            <input type="text" id="user_answer" name="user_answer" required>
+            <!-- Prikaz pitanja -->
+            <img src="../static/images/blackboard.png" style="position: absolute; margin-left: 15.625vw; width: 69.375vw; height: 46.875vw;">
+            <p style="color: white; font-size: 1.406vw; width: 63.542vw; overflow-wrap: break-word; z-index: 2; position: absolute; margin-left: 18.75vw; margin-top: 2.604vw;">Kako se naziva: "{{ definition.description }}"?</p>
+            <!-- Polje za unos odgovora -->
+            <input maxlength="50" style="width: 29.865vw; z-index: 2; position: absolute; font-size: 0.93vw; margin-top: 43vw; color: white; margin-left: 32.7vw; text-align: center;" type="text" class="small-input-field" placeholder="Vaš odgovor..." id="user_answer" name="user_answer" autocomplete="off">
+            <!-- Slika ploče za odgovor -->
+            <img src="../static/images/answer_sheet.png" style="position: absolute; width: 32.031vw; z-index: 1; margin-top: 40vw; margin-left: 32.5vw;">
+            <!-- Skriveno polje za točan odgovor -->
             <input type="hidden" name="correct_answer" value="{{ definition.name }}">
-            <br>
         {% endfor %}
-        <br>
-        <input type="submit" value="Check Answer" onclick="checkAnswer()">
+        <!-- Gumb za provjeru odgovora -->
+        <input onclick="checkAnswer();" style="font-size: 0.93vw; margin-top: 46vw; z-index: 3; margin-left: 41.35vw; text-align: center; position: absolute; width: 5vw; height: 2.083vw; color: #657572; background: #313f44; border: none; outline: none; cursor: pointer;" type="button" value="Odgovori!">
     </form>
-    <p id="result"></p>
-    <button onclick="refreshQuiz()">Get a New Quiz</button>
+    
+    <!-- Gumb za osvježavanje kviza -->
+    <input onclick="refreshQuiz(); clearInput();" style="font-size: 0.93vw; margin-top: 46vw; z-index: 4; margin-left: 48.75vw; text-align: center; position: absolute; width: 7.5vw; height: 2.083vw; color: #657572; background: #313f44; border: none; outline: none; cursor: pointer;" type="button" value="Novo pitanje">
 
+
+    <!-- Slike za prikaz rezultata provjere odgovora -->
+    <img src="../static/images/false.png" id="xImage" class="hidden" style="position: absolute; width: 2.5vw; height: 2.5vw; margin-left: 50vw; margin-top: 20vw; z-index: 6;">
+    <img src="../static/images/correct.png" id="checkImage" class="hidden" style="position: absolute; width: 2.5vw; height: 2.5vw;  margin-left: 50vw; margin-top: 20vw; z-index: 6;">
+
+    <!-- JavaScript kod za provjeru odgovora, brisanje unosa i osvježavanje kviza -->
     <script>
         function checkAnswer() {
             var userAnswer = document.getElementById('user_answer').value;
             var correctAnswer = document.getElementsByName('correct_answer')[0].value;
+            var xImage = document.getElementById('xImage');
+            var checkImage = document.getElementById('checkImage');
 
-            if (userAnswer === correctAnswer) {
-                document.getElementById('result').innerText = 'Correct!';
+            if (userAnswer.toUpperCase() === correctAnswer.toUpperCase()) {
+                // Prikaz slike za točan odgovor i animacija
+                checkImage.classList.remove('hidden');
+                checkImage.style.transform = 'scale(10)';
+                setTimeout(function() {
+                    checkImage.classList.add('hidden');
+                    checkImage.style.transform = 'scale(0)';
+                    refreshQuiz(); // Osvježavanje kviza nakon 2 sekunde
+                }, 2000);
             } else {
-                document.getElementById('result').innerText = 'Incorrect. Try again.';
+                // Prikaz slike za netočan odgovor i animacija
+                xImage.classList.remove('hidden');
+                xImage.style.transform = 'scale(10)';
+                setTimeout(function() {
+                    xImage.classList.add('hidden');
+                    xImage.style.transform = 'scale(0)';
+                }, 2000);
             }
+            clearInput(); // Brisanje unosa nakon provjere odgovora
+        }
+
+        function clearInput() {
+            // Brisanje unosa iz polja za odgovor
+            document.getElementById('user_answer').value = '';
+        }
+
+        function refreshQuiz() {
+            // Osvježavanje stranice za novo pitanje
+            window.location.reload();
         }
     </script>
 </body>

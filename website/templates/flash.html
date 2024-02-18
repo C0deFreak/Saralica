@@ -2,7 +2,7 @@
 
 {% block body %}
 <!-- Slika kutije za kartice -->
-<img src="../static/images/kutija.png" width="715px" height="435px" style="margin-top: 540px; position: absolute; margin-left: 627px; z-index: 3;">
+<img src="../static/images/kutija.png" style="margin-top: 28.125vw; position: absolute; margin-left: 31.615vw; z-index: 3; height: 22.656vw; width: 37.24vw;">
 
 <!-- Stil za flash kartice -->
 <style>
@@ -11,20 +11,21 @@
     }
 
     .card {
-        background: url(../static/images/card.png);
+        background: url(../static/images/card.png) no-repeat;
+        background-size: 32vw;
         transform-style: preserve-3d;
         transition: transform 1s ease;
         cursor: pointer;
         text-align: center;
-        width: 615px;
-        height: 395px;
+        width: 32.031vw;
+        height: 20.573vw;
     }
 
     .card .side {
         display: block;
         position: absolute;
-        height: 395px;
-        width: 615px;
+        height: 20.573vw;
+        width: 32.031vw;
         backface-visibility: hidden;
         align-items: center;
         justify-content: center;
@@ -42,7 +43,7 @@
 
     .card.translate {
         transition: transform 0.5s ease-in-out;
-        transform: translateY(460px);
+        transform: translateY(23.958vw);
     }
 
     .card.translate.delay {
@@ -54,9 +55,9 @@
 <div class="flash-cards">
     <button class="card" onclick="animateButton()">
         <!-- Prednja strana kartice -->
-        <div class="side front" style="font-size: x-large; color: black; font-weight: bold;  height: 200px; overflow-wrap: break-word; width: 530px; margin-left: 30px;">{{ marked.name }}</div>
+        <div class="side front" style="font-size: 1.302vw; color: black; font-weight: bold;  height: 10.417vw; overflow-wrap: break-word; width: 27.604vw; margin-left: 1.563vw;">{{ marked.name }}</div>
         <!-- Zadnja strana kartice -->
-        <div class="side back" style="color: black; font-size: 11.5px; height: 200px; width: 530px; margin-top: -80px; overflow-wrap: break-word; margin-left: 35px;">{{ marked.description }}</div>
+        <div class="side back" style="font-weight: 600; color: black; font-size: 0.579vw; height: 10.417vw; width: 27.604vw; margin-top: -5.167vw; overflow-wrap: break-word; margin-left: 1.823vw;">{{ marked.description }}</div>
     </button>
 </div>
 
@@ -65,15 +66,13 @@
     var cardButton = document.querySelector('.card');
     var clickCount = 0;
 
-    
-
     function animateButton() {
-       
         clickCount++;
 
         if (clickCount % 2 === 1) {
             // Rotacija kartice
             cardButton.classList.add('rotate');
+            document.querySelector('.side.front').innerHTML = '';
         } else {
             // Micanje kartice sa animacijom
             cardButton.classList.add('translate');

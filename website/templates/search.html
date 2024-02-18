@@ -4,55 +4,53 @@
 <!-- Glavni sadržaj stranice -->
 <div class="content">
     <!-- Naslov rezultata pretrage -->
-    <h1 style="text-align: center; color: #f1c3e0; font-size: 37px; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Rezultati za "{{ search }}"</h1>
+    <h1 style="text-align: center; color: #f1c3e0; font-size: 1.927vw; text-shadow: -0.052vw -0.052vw 0 #000, 0.052vw -0.052vw 0 #000, -0.052vw 0.052vw 0 #000, 0.052vw 0.052vw 0 #000;">Rezultati za "{{ search }}"</h1>
 
     <!-- Tabela za prikaz rezultata -->
-    <table style="border-spacing: 0 0px;">
+    <table>
         {% if not isFound or user.definitions|length < 1 %}
+            <!-- Poruka ako nema pronađenih rezultata -->
             <h3 style="text-align: center; color: white;">Nismo uspjeli pronaći rezultate :(</h4>
-            <a class="createbtn" href="/otvaranje" style="border: 1px solid #3b3b3b; margin-left: 810px; border-radius: 0px; font-size: larger;">Izradi novu definiciju!</a>
         {% endif %}
 
         <!-- Prikaz rezultata pretrage -->
         {% for definition in user.definitions|sort(attribute='date_created', reverse=True) %}
             {% if search.lower() == definition.name.lower() %}
                 <!-- Ako je pronađen točan naziv, preusmjeri na definiciju -->
-                <meta http-equiv="refresh" content="0; /definicija/{{ definition.id }}">
+                <meta http-equiv="refresh" content="0; /pojam/{{ definition.id }}">
             {% elif (search.lower() in definition.name.lower() or search.lower() in definition.subject.lower()) or (definition.name.lower() in search.lower() or definition.subject.lower() in search.lower()) %}
                 <!-- Ako je pronađena odgovarajuća definicija, prikaži je -->
                 <tr>
                     <td>
-                        <div style="position: relative; height: 150px;">
-                            <a href="/definicija/{{ definition.id }}" style="text-decoration: none;">
+                        <div style="position: relative; height: 7.813vw;">
+                            <a href="/pojam/{{ definition.id }}" style="text-decoration: none;">
     
                                 <!-- Slika za svaku definiciju -->
-                                <img src="../static/images/note.png" style="width: 1000px; height: 175px; z-index: 1;  padding-left: 52px; padding-bottom: 52px;">
+                                <img src="../static/images/note.png" style="width: 52.083vw; height: 9.115vw; z-index: 1;  padding-left: 2.708vw; padding-bottom: 2.708vw;">
                                 
                                 <!-- Prikaz jezika, naziva i datuma kreiranja -->
-                                <div class="result-text" style="bottom: 170px; left: 185px; color: rgb(220, 220, 220); font-weight: 300; font-size: 17px; font-style: italic;">
+                                <div class="result-text" style="bottom: 8.854vw; left: 9.635vw; color: rgb(220, 220, 220); font-weight: 300; font-size: 0.885vw; font-style: italic;">
                                     <font>{{ definition.subject.upper() }}</font>
                                 </div>
     
-                                <div class="result-text" style="bottom: 220px; left: 85px; color: #6993CB; font-weight: 800; font-size: 23px; ">
+                                <div class="result-text" style="bottom: 11.458vw; left: 4.427vw; color: #6993CB; font-weight: 800; font-size: 1.198vw; ">
                                     <font>{{ definition.name }}</font>
+                                    <!-- Dodavanje oznake ako je definicija označena -->
                                     {% if definition.bookmark %}
-                                        <img src="../static/images/MARKEDbtn.png" style="width: 50px; height: 50px; z-index: 2; position: absolute; left: 875px; bottom: -50px;">
+                                        <img src="../static/images/MARKEDbtn.png" style="width: 2.604vw; height: 2.604vw; z-index: 2; position: absolute; left: 45.573vw; bottom: -2.604vw;">
                                     {% endif %}
                                 </div>
     
-                                <div class="result-text" style="bottom: 216px; left: 85px; color: rgb(220, 220, 220); font-weight: lighter; font-size: 15px;">
+                                <div class="result-text" style="bottom: 11.25vw; left: 4.427vw; color: rgb(220, 220, 220); font-weight: lighter; font-size: 0.781vw;">
                                     <font>{{ definition.date_created.date() }}, </font>
                                 </div>
     
-                                <div style="position: relative; bottom: 206px; left: 85px; z-index: 2; color: white; font-weight: lighter; font-size: 12px; overflow-wrap: break-word; width: 850px;">
+                                <!-- Prikaz opisa definicije -->
+                                <div style="position: relative; bottom: 10.729vw; left: 4.427vw; z-index: 2; color: white; font-weight: lighter; font-size: 0.625vw; overflow-wrap: break-word; width: 45.573vw;">
                                     <font><font>{{ definition.description[:500] }}{% if definition.description|length > 500 %}...{% endif %}</font></font>
                                 </div>
-
-                                
                             </a>
                         </div>
-                        
-
                     </td>
                 </tr>
             {% endif %}

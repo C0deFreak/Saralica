@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="hr">
 <head>
+    <!-- Metapodaci -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA:Compatible" content="ie=edge">
+    
+    <!-- Vanjski stilovi -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    {% block head %}{% endblock %}
+    
+    {% block head %}{% endblock %} <!-- Blok za dodatne stilove u potklasi -->
 </head>    
 <body>
+    <!-- Stilovi za navigacijsku traku -->
     <style>
         #navbar {
             position: fixed;
             top: 0;
             left: 0;
-            width: 50px;
+            width: 2.604vw;
             height: 100%;
-            background: url(../static/images/pinboard.jpg) no-repeat; /* Set background here */
+            background: url(../static/images/pinboard.jpg) no-repeat;
             background-size: cover;
             z-index: 10;
         }
@@ -24,13 +29,12 @@
             list-style-type: none;
             margin: 0;
             padding: 0;
-            width: 50px;
+            width: 2.604vw;
         }
 
         ul.vertical li a {
             display: block;
             color: #000;
-            padding: 0px 0 0px 0px;
             text-decoration: none;
         }
 
@@ -45,20 +49,20 @@
         }
 
         #navbar > ul.vertical > li > a > img {
-            width: 50px; 
-            height: 50px;
-            margin-top: 7.2vw; 
+            width: 2.604vw;
+            height: 2.604vw;
+            margin-top: 7.2vw;
             margin-bottom: 7.2vw;
             position: sticky;
-            
         }
     </style>
     
     <!-- Navigacijska traka -->
     <div id="navbar">
         <ul class="vertical ex">
+            <!-- Provjera autentikacije korisnika za prikazivanje odgovarajućih poveznica -->
             {% if user.is_authenticated %}
-                <li><a href="/"><img src="../static/images/HOMEbtn.png"></a></li>
+                <li><a href="/zatvaranje"><img src="../static/images/HOMEbtn.png"></a></li>
                 <li><a href="/zabilježeno"><img src="../static/images/MARKEDbtn.png"></a></li>
                 <li><a href="/auth/logout"><img src="../static/images/LOGOUTbtn.png"></a></li>
             {% else %}
@@ -66,50 +70,40 @@
                 <li><a href="/auth/sign-up"><img src="../static/images/SIGNUPbtn.png" style="margin-top: 11.5vw; margin-bottom: 11.5vw;"></a></li>
             {% endif %}
         </ul>
-        
-            <table>
-                {% for function in functions %}
-                    {% if function.bookmark %}
-                        <tr>
-                            <td style="font-size: large; padding-right: 200px; padding-top: 25px;">
-                                <img src="../static/images/SearchBAR.png" style="position: absolute; width: 315px; height: 40; z-index: 1; padding-right: 20px;">
-                                <font color="white">-</font><a href="/definicija/{{function.id}}" style="text-decoration: none; color: black; position: absolute; z-index: 2; white-space: nowrap; font-weight: bold;">{{ function.name }}</a></font>
-                            </td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
-            </table>
-        </div>
     </div>
+    
+    <!-- Stilovi za prikazivanje poruka upozorenja -->
     <style>
         .alert {
-            height: 40px;
-            position: fixed; /* Position it fixed to the top */
-            top: 0; /* Align it to the top */
-            left: 0; /* Align it to the left */
+            height: 2.083vw;
+            position: fixed;
+            top: 0;
+            left: 0;
             text-align: center;
-            line-height: 40px; 
+            line-height: 2.083vw; 
             font-weight: bold;
-            box-sizing: border-box; /* Include padding in width */
-            width: 100vw; /* Full width of the viewport */
+            box-sizing: border-box;
+            width: 100vw;
         }
     </style>
 
+    <!-- Prikazivanje poruka upozorenja -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
                 {% if category == 'error' %}
-                    <div class="alert" style="color: #721c24; background-color: #f8d7da;">
+                    <div class="alert" style="color: #721c24; background-color: #f8d7da; z-index: 10;">
                         {{ message }}
                     </div>
                 {% else %}
-                    <div class="alert" style="color: #155724; background-color: #d4edda;">
+                    <div class="alert" style="color: #155724; background-color: #d4edda; z-index: 10;">
                         {{ message }}
                     </div>
                 {% endif %}
             {% endfor %}
         {% endif %}
     {% endwith %}
-    {% block body %}{% endblock %}
+    
+    {% block body %}{% endblock %} <!-- Blok za sadržaj u potklasi -->
 </body>
 </html>

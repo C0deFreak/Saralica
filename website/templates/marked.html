@@ -3,34 +3,37 @@
 {% block body %}
 <!-- Glavni sadržaj stranice -->
 <div class="content">
-    <h1 style="text-align: center; color: #f1c3e0; font-size: 37px; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Zabilježeni pojmovi</h1>
+    <!-- Naslov -->
+    <h1 style="text-align: center; color: #f1c3e0; font-size: 1.927vw; text-shadow: -0.052vw -0.052vw 0 #000, 0.052vw -0.052vw 0 #000, -0.052vw 0.052vw 0 #000, 0.052vw 0.052vw 0 #000;">Zabilježeni pojmovi</h1>
+    
     <!-- Tabela za prikaz rezultata -->
-    <table style="border-spacing: 0 0px;">
-
+    <table>
         <!-- Prikaz rezultata pretrage -->
         {% for definition in bookmarked %}
             <tr>
                 <td>
-                    <div style="position: relative; height: 150px;">
-                        <a href="/definicija/{{ definition.id }}" style="text-decoration: none;">
+                    <div style="position: relative; height: 7.813vw;">
+                        <!-- Link na pojedinu definiciju -->
+                        <a href="/pojam/{{ definition.id }}" style="text-decoration: none;">
 
                             <!-- Slika za svaku definiciju -->
-                            <img src="../static/images/note.png" style="width: 1000px; height: 175px; z-index: 1;  padding-left: 52px; padding-bottom: 52px;">
+                            <img src="../static/images/note.png" style="width: 52.083vw; height: 9.115vw; z-index: 1;  padding-left: 2.708vw; padding-bottom: 2.708vw;">
                             
                             <!-- Prikaz jezika, naziva i datuma kreiranja -->
-                            <div class="result-text" style="bottom: 170px; left: 185px; color: rgb(220, 220, 220); font-weight: 300; font-size: 17px; font-style: italic;">
+                            <div class="result-text" style="bottom: 8.854vw; left: 9.635vw; color: rgb(220, 220, 220); font-weight: 300; font-size: 0.885vw; font-style: italic;">
                                 <font>{{ definition.subject.upper() }}</font>
                             </div>
 
-                            <div class="result-text" style="bottom: 220px; left: 85px; color: #6993CB; font-weight: 800; font-size: 23px; ">
+                            <div class="result-text" style="bottom: 11.458vw; left: 4.427vw; color: #6993CB; font-weight: 800; font-size: 1.198vw; ">
                                 <font>{{ definition.name }}</font>
                             </div>
 
-                            <div class="result-text" style="bottom: 216px; left: 85px; color: rgb(220, 220, 220); font-weight: lighter; font-size: 15px;">
+                            <div class="result-text" style="bottom: 11.25vw; left: 4.427vw; color: rgb(220, 220, 220); font-weight: lighter; font-size: 0.781vw;">
                                 <font>{{ definition.date_created.date() }}, </font>
                             </div>
 
-                            <div style="position: relative; bottom: 206px; left: 85px; z-index: 2; color: white; font-weight: lighter; font-size: 12px; overflow-wrap: break-word; width: 940px;">
+                            <!-- Prikaz opisa pojma -->
+                            <div style="position: relative; bottom: 10.729vw; left: 4.427vw; z-index: 2; color: white; font-weight: lighter; font-size: 0.625vw; overflow-wrap: break-word; width: 48.958vw;">
                                 <font><font>{{ definition.description[:550] }}{% if definition.description|length > 550 %}...{% endif %}</font></font>
                             </div>
                         </a>

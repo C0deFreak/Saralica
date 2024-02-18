@@ -1,29 +1,41 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<img src="../static/images/pinboard.jpg" style="height: 600px; width: 500px; position: absolute; margin-top: 146px; margin-left: 710px; z-index: 0;">
-<form method="POST" style="color: white; position: absolute; z-index: 1; width: 500px; margin-left: 710px;">
-    <div style="font-weight: bolder; font-size: 30px; text-align: center; margin-top: 175px;">
+<!-- Pozadinska slika -->
+<img src="../static/images/pinboard.jpg" style="height: 31.25vw; width: 26.042vw; position: absolute; margin-top: 7.5vw; margin-left: 37vw; z-index: 0;">
+
+<!-- Forma za registraciju -->
+<form method="POST" style="color: white; position: absolute; z-index: 1; width: 26.042vw; margin-left: 37vw;">
+    <!-- Naslov forme -->
+    <div style="font-weight: bolder; font-size: 1.563vw; text-align: center; margin-top: 9.115vw;">
         <font>Registracija</font>
     </div>
-    <div style="font-weight: bolder; font-size: 15px; text-align: center; margin-top: 0px;">
+
+    <!-- Podnaslov forme -->
+    <div style="font-weight: bolder; font-size: 0.781vw; text-align: center; margin-top: 0vw;">
         <font>Pridružite se🎉</font>
     </div>
 
-    <div style="margin-left: 100px; font-weight: bolder; font-size: 15px; text-align: center;">
-        <font style="margin-left: -80px;  position: absolute; margin-top: 57px;">Korisničko ime: </font>
-        <input type="text" id="username" name="username" style="border-radius: 10px; height: 30px; width: 250px; text-align: center; margin-top: 50px; margin-left: 50px;">
+    <!-- Polje za unos korisničkog imena -->
+    <div style="margin-left: 5.208vw; font-weight: bolder; font-size: 0.781vw; text-align: center;">
+        <font style="margin-left: -4.167vw;  position: absolute; margin-top: 2.969vw;">Korisničko ime: </font>
+        <input type="text" id="username" name="username" style="border-radius: 0.521vw; height: 1.563vw; width: 13.021vw; text-align: center; margin-top: 2.604vw; margin-left: 2.604vw; font-size: 0.703vw;">
 
-        <font style="margin-left: -420px; margin-top: 133px; position: absolute; overflow: hidden; white-space: nowrap;">E-mail adresa: </font>
-        <input type="email" id="email" name="email" style="border-radius: 10px; height: 30px; width: 300px; text-align: center; margin-top: 40px; margin-left: 20px;">
+        <!-- Polje za unos email adrese -->
+        <font style="margin-left: -21.875vw; margin-top: 6.927vw; position: absolute; overflow: hidden; white-space: nowrap;">E-mail adresa: </font>
+        <input type="email" id="email" name="email" style="border-radius: 0.521vw; height: 1.563vw; width: 15.625vw; text-align: center; margin-top: 2.083vw; margin-left: 1.042vw; font-size: 0.703vw;">
 
-        <font style="margin-left: -350px;  position: absolute; margin-top: 122px;">Lozinka: </font>
-        <input type="password1" id="password1" name="password1" style="border-radius: 10px; height: 30px; width: 200px; text-align: center; margin-top: 40px; margin-left: -10px;">
-        <font style="margin-left: -325px; position: absolute; margin-top: 92px; overflow: hidden; white-space: nowrap;">Potvrdite lozinku: </font>
-        <input type="password2" id="password2" name="password2" style="border-radius: 10px; height: 30px; width: 200px; text-align: center; margin-top: 10px; margin-left: 70px;">
+        <!-- Polje za unos lozinke -->
+        <font style="margin-left: -18.229vw;  position: absolute; margin-top: 6.354vw;">Lozinka: </font>
+        <input type="password" id="password1" name="password1" style="border-radius: 0.521vw; height: 1.563vw; width: 10.417vw; text-align: center; margin-top: 2.083vw; margin-left: -0.521vw; font-size: 0.703vw;">
+
+        <!-- Polje za potvrdu lozinke -->
+        <font style="margin-left: -16.927vw; position: absolute; margin-top: 4.792vw; overflow: hidden; white-space: nowrap;">Potvrdite lozinku: </font>
+        <input type="password" id="password2" name="password2" style="border-radius: 0.521vw; height: 1.563vw; width: 10.417vw; text-align: center; margin-top: 0.521vw; margin-left: 3.646vw; font-size: 0.703vw;">
     </div>
     
-    <button type="submit" style="background-color: #b49272; border-radius: 10px; width: 100px; height: 35px; border: none; color: white; font-weight: bolder; margin-top: 70px; margin-left: 200px;">Registriraj se</button>
+    <!-- Gumb za slanje forme -->
+    <button type="submit" style="background-color: #b49272; border-radius: 0.521vw; width: 5.208vw; height: 1.823vw; border: none; color: white; font-weight: bolder; margin-top: 3.646vw; margin-left: 10.417vw; cursor: pointer; font-size: 0.703vw;">Registriraj se</button>
 </form>
 
 {% endblock %}

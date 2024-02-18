@@ -1,20 +1,25 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<img src="../static/images/pinboard.jpg" style="height: 600px; width: 500px; position: absolute; margin-top: 146px; margin-left: 710px; z-index: 0;">
-<form method="POST" style="color: white; position: absolute; z-index: 1; width: 500px; margin-left: 710px;">
-    <div style="font-weight: bolder; font-size: 30px; text-align: center; margin-top: 175px;">
+<!-- Glavni sadržaj stranice -->
+<img src="../static/images/pinboard.jpg" style="height: 30.3vw; width: 25.25vw; position: absolute; margin-top: 7.5vw; margin-left: 37vw; z-index: 0;">
+<form method="POST" style="color: white; position: absolute; z-index: 1; width: 25.25vw; margin-left: 37vw;">
+    <!-- Naslov forme -->
+    <div style="font-weight: bolder; font-size: 1.52vw; text-align: center; margin-top: 8.84vw;">
         <font>Prijava</font>
     </div>
-    <div style="font-weight: bolder; font-size: 15px; text-align: center; margin-top: 0px;">
+    <!-- Dobrodošlica -->
+    <div style="font-weight: bolder; font-size: 0.76vw; text-align: center; margin-top: 0vw;">
         <font>Dobro došli👋</font>
     </div>
 
-    <div style="margin-left: 100px;">
-        <input type="email" id="email" name="email" placeholder="E-mail" style="border-radius: 15px; height: 30px; width: 300px; text-align: center; margin-top: 70px;">
-        <input type="password" id="password" name="password" placeholder="Lozinka" style="border-radius: 15px; height: 30px; width: 300px; text-align: center; margin-top: 30px;">
+    <!-- Polja za unos e-maila i lozinke -->
+    <div style="margin-left: 5.05vw;">
+        <input type="email" id="email" name="email" placeholder="E-mail" style="border-radius: 0.76vw; height: 1.52vw; width: 15.15vw; text-align: center; margin-top: 3.54vw; font-size: 0.703vw;">
+        <input type="password" id="password" name="password" placeholder="Lozinka" style="border-radius: 0.76vw; height: 1.52vw; width: 15.15vw; text-align: center; margin-top: 1.52vw; font-size: 0.703vw;">
     </div>
     
-    <button type="submit" style="background-color: #b49272; border-radius: 10px; width: 100px; height: 35px; border: none; color: white; font-weight: bolder; margin-top: 70px; margin-left: 200px;">Prijavi se</button>
+    <!-- Gumb za prijavu -->
+    <button type="submit" style="background-color: #b49272; border-radius: 0.5vw; width: 5.05vw; height: 1.77vw; border: none; color: white; font-weight: bolder; margin-top: 3.54vw; margin-left: 10.1vw; cursor: pointer; font-size: 0.703vw;">Prijavi se</button>
 </form>
 {% endblock %}
